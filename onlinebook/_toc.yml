@@ -1,0 +1,25 @@
+format: jb-book
+root: docs/index
+defaults:
+  maxdepth: 3
+parts:
+- caption: Case studies and Demos
+  chapters:
+  - file: docs/introduction
+  - file: docs/Case1_retails_intro
+    sections:
+    - file: docs/Case1_1_Simple_Retail_Demand_Model
+    - file: docs/Case1_2_Module1A_Retail_Demand_Model
+    - file: docs/Case1_3_Module1B_Retail_Demand_Predict
+    - file: docs/Case1_4_Module2A_Retail_Price_Optimization
+    - file: docs/Case1_5_Module2B_Retail_Price_Optimization_Script
+  - file: docs/Case2_online_fulfillment
+    sections:
+    - file: docs/Case2_1_Module1_Online_Fulfillment_Script
+  - file: docs/Case3_disruption_analytics
+    sections:
+    - file: docs/Case3_1_Disruption_Risk_Analytics
+- caption: Additional Examples of Analytics Techniques in Supply Chains
+  chapters:
+  - file: docs/Ex_Lecture_Demo_Inventory_Sim
+  - file: docs/Ex_Bass_diffusion_full_demo

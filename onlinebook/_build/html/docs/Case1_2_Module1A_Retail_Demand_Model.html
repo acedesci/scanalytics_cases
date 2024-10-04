@@ -1,0 +1,1030 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Module 1A: Retail predictive model pipeline for multiple items &#8212; Supply Chain Analytics - Case Studies and Demos with Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Case1_2_Module1A_Retail_Demand_Model';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 1B: Predicting demands from trained models for decision models" href="Case1_3_Module1B_Retail_Demand_Predict.html" />
+    <link rel="prev" title="Demo: Simplified retail prediction pipeline for a single item" href="Case1_1_Simple_Retail_Demand_Model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/sc_analytics_logo_small.png" class="logo__image only-light" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>
+    <script>document.write(`<img src="../_static/sc_analytics_logo_small.png" class="logo__image only-dark" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Case studies and Demos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Case1_retails_intro.html">Case: Retail analytics - Rue La La</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Case1_1_Simple_Retail_Demand_Model.html">Demo: Simplified retail prediction pipeline for a single item</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Module 1A: Retail predictive model pipeline for multiple items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_3_Module1B_Retail_Demand_Predict.html">Module 1B: Predicting demands from trained models for decision models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_4_Module2A_Retail_Price_Optimization.html">Module 2A: Retail price optimization - Simple Explicit Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_5_Module2B_Retail_Price_Optimization_Script.html">Module 2B: Retail price optimization - Automated Implicit Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case2_online_fulfillment.html">Case: Online fulfillment - US online retail</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case2_1_Module1_Online_Fulfillment_Script.html">Demo: Online Fulfillment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case3_disruption_analytics.html">Case: Disruption Analytics - Ford Motor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case3_1_Disruption_Risk_Analytics.html">Demo: Supply Chain Distruption Risk Analytics</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Examples of Analytics Techniques in Supply Chains</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex_Lecture_Demo_Inventory_Sim.html">(R, s, S) Inventory Simulation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Ex_Bass_diffusion_full_demo.html">Bass Diffusion - full demo</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Case1_2_Module1A_Retail_Demand_Model.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 1A: Retail predictive model pipeline for multiple items</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplement-plot-functions-this-is-a-pre-built-plot-function"><em>Supplement - Plot functions (this is a pre-built plot function)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-1-data-input">Block 1: Data input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-2-feature-engineering-preparation">Block 2: Feature engineering &amp; preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-model-algorithm-training-testing">Block 3: Model &amp; algorithm (training &amp; testing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-model-selection">Block 4: Model selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-trained-models">Save trained models</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-1a-retail-predictive-model-pipeline-for-multiple-items">
+<h1>Module 1A: Retail predictive model pipeline for multiple items<a class="headerlink" href="#module-1a-retail-predictive-model-pipeline-for-multiple-items" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/acedesci/scanalytics/blob/master/EN/S08_09_Retail_Analytics/S8_Module1A_Retail_Demand_Model.ipynb"><strong>Link to Google Colab of this Notebook</strong></a></p>
+<p>This is the full version of the Module 1 (predictive model) which extends the simplified version of one item described previously to multiple items. Almost all of the parts of the codes folllow the same logic and process as the simplified Module 1 for one product (UPC).</p>
+<p>We begin by loading the required packages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="supplement-plot-functions-this-is-a-pre-built-plot-function">
+<h2><em>Supplement - Plot functions (this is a pre-built plot function)</em><a class="headerlink" href="#supplement-plot-functions-this-is-a-pre-built-plot-function" title="Permalink to this heading">#</a></h2>
+<p><em>They will be used later on for visualizations. There is no need to go through them. You only need to run the codes.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#See https://matplotlib.org/devdocs/gallery/subplots_axes_and_figures/subplots_demo.html</span>
+
+<span class="k">def</span> <span class="nf">plot_data_scatter</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">feature_list</span><span class="p">):</span>
+    <span class="c1"># Plot the results</span>
+
+    <span class="n">n_row_plot</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_list</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 2 plots per row</span>
+    <span class="n">n_col_plot</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n_row_plot</span><span class="p">,</span> <span class="n">n_col_plot</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># column index of the plot</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># row index of the plot</span>
+
+    <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_list</span><span class="p">)):</span>
+        <span class="c1">#print(data_x[:,i])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_x</span><span class="p">[:,</span><span class="nb">min</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_list</span><span class="p">))],</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span><span class="nb">min</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_list</span><span class="p">))],</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">,</span>
+                    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;royalblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;prediction&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">feature_list</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+
+        <span class="n">ax</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;UNITS&#39;</span><span class="p">)</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_list</span><span class="p">))</span> <span class="o">%</span> <span class="n">n_col_plot</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="block-1-data-input">
+<h2>Block 1: Data input<a class="headerlink" href="#block-1-data-input" title="Permalink to this heading">#</a></h2>
+<p>In addition to the original data, we add a new variable, which is the squared price (‘PRICE_p2’).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S08_09_Retail_Analytics/salesCereals.csv&#39;</span>
+
+<span class="n">salesCereals</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;PRICE_p2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;PRICE&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">salesCereals</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>WEEK_END_DATE</th>
+      <th>STORE_NUM</th>
+      <th>UPC</th>
+      <th>UNITS</th>
+      <th>VISITS</th>
+      <th>HHS</th>
+      <th>SPEND</th>
+      <th>PRICE</th>
+      <th>BASE_PRICE</th>
+      <th>...</th>
+      <th>DISPLAY</th>
+      <th>TPR_ONLY</th>
+      <th>Desc</th>
+      <th>Category</th>
+      <th>Sub-Category</th>
+      <th>SUMPRICE</th>
+      <th>COUNTPRICE</th>
+      <th>AVGPRICE</th>
+      <th>RELPRICE</th>
+      <th>PRICE_p2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>2009-01-14</td>
+      <td>367.0</td>
+      <td>1111085319</td>
+      <td>14.0</td>
+      <td>13.0</td>
+      <td>13.0</td>
+      <td>26.32</td>
+      <td>1.88</td>
+      <td>1.88</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>PL HONEY NUT TOASTD OATS</td>
+      <td>COLD CEREAL</td>
+      <td>ALL FAMILY CEREAL</td>
+      <td>19.54</td>
+      <td>7</td>
+      <td>2.791429</td>
+      <td>0.673490</td>
+      <td>3.5344</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8</td>
+      <td>2009-01-14</td>
+      <td>367.0</td>
+      <td>1111085350</td>
+      <td>35.0</td>
+      <td>27.0</td>
+      <td>25.0</td>
+      <td>69.30</td>
+      <td>1.98</td>
+      <td>1.98</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>PL BT SZ FRSTD SHRD WHT</td>
+      <td>COLD CEREAL</td>
+      <td>ALL FAMILY CEREAL</td>
+      <td>19.54</td>
+      <td>7</td>
+      <td>2.791429</td>
+      <td>0.709314</td>
+      <td>3.9204</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>12</td>
+      <td>2009-01-14</td>
+      <td>367.0</td>
+      <td>1600027527</td>
+      <td>12.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>38.28</td>
+      <td>3.19</td>
+      <td>3.19</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>GM HONEY NUT CHEERIOS</td>
+      <td>COLD CEREAL</td>
+      <td>ALL FAMILY CEREAL</td>
+      <td>19.54</td>
+      <td>7</td>
+      <td>2.791429</td>
+      <td>1.142784</td>
+      <td>10.1761</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13</td>
+      <td>2009-01-14</td>
+      <td>367.0</td>
+      <td>1600027528</td>
+      <td>31.0</td>
+      <td>26.0</td>
+      <td>19.0</td>
+      <td>142.29</td>
+      <td>4.59</td>
+      <td>4.59</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>GM CHEERIOS</td>
+      <td>COLD CEREAL</td>
+      <td>ALL FAMILY CEREAL</td>
+      <td>19.54</td>
+      <td>7</td>
+      <td>2.791429</td>
+      <td>1.644319</td>
+      <td>21.0681</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>14</td>
+      <td>2009-01-14</td>
+      <td>367.0</td>
+      <td>1600027564</td>
+      <td>56.0</td>
+      <td>48.0</td>
+      <td>42.0</td>
+      <td>152.32</td>
+      <td>2.72</td>
+      <td>3.07</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>GM CHEERIOS</td>
+      <td>COLD CEREAL</td>
+      <td>ALL FAMILY CEREAL</td>
+      <td>19.54</td>
+      <td>7</td>
+      <td>2.791429</td>
+      <td>0.974411</td>
+      <td>7.3984</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+<p>‘UPC’ stands for Universal Product Code, which can be understood as one SKU in this case and in our SCM terms in general. The code below helps us identify the SKUs by which we want to forecast and their corresponding data size (number of data instances). We can see that the number of instances for each UPC is similar and that there is no UPC with only a few data points. This is important because training a model on a small dataset may limit its generalization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">salesCereals</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;UPC&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            Unnamed: 0  WEEK_END_DATE  STORE_NUM  UNITS  VISITS  HHS  SPEND  \
+UPC                                                                           
+1111085319         156            156        156    156     156  156    156   
+1111085350         156            156        156    156     156  156    156   
+1600027527         156            156        156    156     156  156    156   
+1600027528         156            156        156    156     156  156    156   
+1600027564         155            155        155    155     155  155    155   
+3000006340         133            133        133    133     133  133    133   
+3800031829         155            155        155    155     155  155    155   
+
+            PRICE  BASE_PRICE  FEATURE  DISPLAY  TPR_ONLY  Desc  Category  \
+UPC                                                                         
+1111085319    156         156      156      156       156   156       156   
+1111085350    156         156      156      156       156   156       156   
+1600027527    156         156      156      156       156   156       156   
+1600027528    156         156      156      156       156   156       156   
+1600027564    155         155      155      155       155   155       155   
+3000006340    133         133      133      133       133   133       133   
+3800031829    155         155      155      155       155   155       155   
+
+            Sub-Category  SUMPRICE  COUNTPRICE  AVGPRICE  RELPRICE  PRICE_p2  
+UPC                                                                           
+1111085319           156       156         156       156       156       156  
+1111085350           156       156         156       156       156       156  
+1600027527           156       156         156       156       156       156  
+1600027528           156       156         156       156       156       156  
+1600027564           155       155         155       155       155       155  
+3000006340           133       133         133       133       133       133  
+3800031829           155       155         155       155       155       155  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="block-2-feature-engineering-preparation">
+<h2>Block 2: Feature engineering &amp; preparation<a class="headerlink" href="#block-2-feature-engineering-preparation" title="Permalink to this heading">#</a></h2>
+<p>We then organize the data by ‘UPC.’ The model presented here only runs on a predetermined subset of variables in the data. You can add or remove these explanatory variables based on your judgemental call.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PRICE&#39;</span><span class="p">,</span> <span class="s1">&#39;PRICE_p2&#39;</span><span class="p">,</span> <span class="s1">&#39;FEATURE&#39;</span><span class="p">,</span> <span class="s1">&#39;DISPLAY&#39;</span><span class="p">,</span><span class="s1">&#39;TPR_ONLY&#39;</span><span class="p">,</span><span class="s1">&#39;RELPRICE&#39;</span><span class="p">]</span>
+
+<span class="n">productList</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">productList</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span>
+<span class="n">y</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">upc</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+
+  <span class="n">X</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">upc</span><span class="p">][</span><span class="n">feature_list</span><span class="p">]</span>
+  <span class="n">y</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">upc</span><span class="p">][</span><span class="s1">&#39;UNITS&#39;</span><span class="p">]</span>
+  <span class="c1"># Split into training and testing data</span>
+  <span class="n">X_train</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1111085319 1111085350 1600027527 1600027528 1600027564 3000006340
+ 3800031829]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="block-3-model-algorithm-training-testing">
+<h2>Block 3: Model &amp; algorithm (training &amp; testing)<a class="headerlink" href="#block-3-model-algorithm-training-testing" title="Permalink to this heading">#</a></h2>
+<p>In the next two cells, we train and test two different types of models, namely Linear Regression and Tree Regression. In each cell, we create a loop <strong>for</strong> each UPC on the product list. The first line in each loop is to train the model and the second line is for testing the model’s performance on unseen data. The next three lines compute the performance metrics we would like to measure.</p>
+<p>We organize the linear regression result by ‘UPC’ (row) and performance metrics (columns). Then we create a dataframe and put the computed metric in the corresponding column (the last line in each loop).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Linear model</span>
+<span class="n">regr</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">regrSummary</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trainRMSE&#39;</span><span class="p">,</span> <span class="s1">&#39;testRMSE&#39;</span><span class="p">,</span><span class="s1">&#39;testMAE&#39;</span><span class="p">,</span><span class="s1">&#39;testMAPE&#39;</span><span class="p">],</span> <span class="n">index</span> <span class="o">=</span> <span class="n">productList</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">upc</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+    <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span><span class="n">y_train</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+    <span class="n">trainRMSE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">upc</span><span class="p">])))</span>
+    <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+
+    <span class="n">testMAE</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+    <span class="n">testMAPE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span> <span class="o">/</span> <span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">]))</span>
+    <span class="n">testRMSE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">]))</span>
+    <span class="n">regrSummary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span>  <span class="p">[</span><span class="n">trainRMSE</span><span class="p">,</span> <span class="n">testRMSE</span><span class="p">,</span> <span class="n">testMAE</span><span class="p">,</span> <span class="n">testMAPE</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Linear regression Summary&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average training RMSE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;trainRMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average testing RMSE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;testRMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average testing MAE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;testMAE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average testing MAPE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;testMAPE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear regression Summary
+            trainRMSE   testRMSE    testMAE  testMAPE
+1111085319   7.712708   8.232999   6.568929  0.838554
+1111085350   7.305901   7.696171   6.135274  0.748932
+1600027527  15.073315  23.519902  13.546774  0.547776
+1600027528   9.073374   14.06519   8.088092  0.251657
+1600027564   8.770006   6.796714   5.239537   0.27655
+3000006340   4.255693   3.874297   2.886348  0.720298
+3800031829   7.650327   8.518524   6.574746  0.379121
+average training RMSE:8.55
+average testing RMSE:10.39
+average testing MAE:7.01
+average testing MAPE:0.54
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we visualize the data points and the predictions using the previously defined plot function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot prediction results for a product (UPC)</span>
+<span class="n">upc</span> <span class="o">=</span> <span class="n">productList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">data_y</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">upc</span><span class="p">][</span><span class="s1">&#39;UNITS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">data_x</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">upc</span><span class="p">][</span><span class="n">feature_list</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">plot_data_scatter</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">X_test</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">feature_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e1d37ed7f3d79b90141e25009c3eb657d2a1a21b32cbc16cf22703c4cf0c7cca.png" src="../_images/e1d37ed7f3d79b90141e25009c3eb657d2a1a21b32cbc16cf22703c4cf0c7cca.png" />
+</div>
+</div>
+<p>In order to see the impact of the price on the demand, we use a simple plot function below from mathplotlib to see how the demand would change when the price changes.</p>
+<p>For more details of the plot function, please see: <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upc</span> <span class="o">=</span> <span class="n">productList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">input_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.75</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]</span>
+
+<span class="c1"># generate inputs for the plot using simple feature values and varying price points</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+  <span class="n">input_x</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+<span class="c1"># obtain the predicted demands</span>
+<span class="n">predict_y</span> <span class="o">=</span> <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prices</span><span class="p">,</span> <span class="n">predict_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Demand&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D:\ProgramData\Anaconda3\envs\sca_book2\lib\site-packages\sklearn\base.py:464: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+</pre></div>
+</div>
+<img alt="../_images/1ae6cd065b613a6bb9502ab74f58fa49dda9742752ba85e4b10a1eedbebe3a35.png" src="../_images/1ae6cd065b613a6bb9502ab74f58fa49dda9742752ba85e4b10a1eedbebe3a35.png" />
+</div>
+</div>
+<p>Likewise, we obtain the tree regression results by simply changing the function name and the result table name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Tree models</span>
+<span class="n">regr</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">regrSummary</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trainRMSE&#39;</span><span class="p">,</span> <span class="s1">&#39;testRMSE&#39;</span><span class="p">,</span><span class="s1">&#39;testMAE&#39;</span><span class="p">,</span><span class="s1">&#39;testMAPE&#39;</span><span class="p">],</span> <span class="n">index</span> <span class="o">=</span> <span class="n">productList</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">upc</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+
+    <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span><span class="n">y_train</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span> <span class="c1"># standard regression tree</span>
+    <span class="c1"># regr[upc] = sklearn.ensemble.RandomForestRegressor(random_state = 0).fit(X_train[upc],y_train[upc]) # random forest tree</span>
+    <span class="n">trainRMSE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">upc</span><span class="p">])))</span>
+    <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+
+    <span class="n">testMAE</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+    <span class="n">testMAPE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span> <span class="o">/</span> <span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">]))</span>
+    <span class="n">testRMSE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">]))</span>
+    <span class="n">regrSummary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span>  <span class="p">[</span><span class="n">trainRMSE</span><span class="p">,</span> <span class="n">testRMSE</span><span class="p">,</span> <span class="n">testMAE</span><span class="p">,</span> <span class="n">testMAPE</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Regression Tree Summary&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average training RMSE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;trainRMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average testing RMSE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;testRMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average testing MAE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;testMAE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average testing MAPE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;testMAPE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regression Tree Summary
+           trainRMSE   testRMSE    testMAE  testMAPE
+1111085319  2.038099  10.759611   7.102564  0.841491
+1111085350       0.0   7.471313   5.923077  0.625815
+1600027527  1.147275  30.330234  15.564103  0.520292
+1600027528   2.65623  13.221001   8.641026  0.286716
+1600027564       0.0  10.453806   7.897436   0.38854
+3000006340  0.514111   7.762087        4.5  0.992923
+3800031829  1.543898   9.131518   7.487179  0.421318
+average training RMSE:1.13
+average testing RMSE:12.73
+average testing MAE:8.16
+average testing MAPE:0.58
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot prediction results for a product (UPC)</span>
+<span class="n">upc</span> <span class="o">=</span> <span class="n">productList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">data_y</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">upc</span><span class="p">][</span><span class="s1">&#39;UNITS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">data_x</span> <span class="o">=</span> <span class="n">salesCereals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">salesCereals</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">upc</span><span class="p">][</span><span class="n">feature_list</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">plot_data_scatter</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">X_test</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">feature_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/97acc3ac154432e06ce5c0fcdaa6d0295ceaac3d2828aeb9d6d1082ab1aa7956.png" src="../_images/97acc3ac154432e06ce5c0fcdaa6d0295ceaac3d2828aeb9d6d1082ab1aa7956.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upc</span> <span class="o">=</span> <span class="n">productList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">input_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.75</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]</span>
+
+<span class="c1"># generate inputs for the plot using simple feature values and varying price points</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+  <span class="n">input_x</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+<span class="c1"># obtain the predicted demands</span>
+<span class="n">predict_y</span> <span class="o">=</span> <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prices</span><span class="p">,</span> <span class="n">predict_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Demand&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D:\ProgramData\Anaconda3\envs\sca_book2\lib\site-packages\sklearn\base.py:464: UserWarning: X does not have valid feature names, but DecisionTreeRegressor was fitted with feature names
+  warnings.warn(
+</pre></div>
+</div>
+<img alt="../_images/de89da1495854edcbea6c94d2acc2ec5744d6f3d0ecfa713b5edc5aa59a1a6d5.png" src="../_images/de89da1495854edcbea6c94d2acc2ec5744d6f3d0ecfa713b5edc5aa59a1a6d5.png" />
+</div>
+</div>
+</section>
+<section id="block-4-model-selection">
+<h2>Block 4: Model selection<a class="headerlink" href="#block-4-model-selection" title="Permalink to this heading">#</a></h2>
+<p>By comparing the average result, we can see that the linear regression model generally outperformed the decision tree regression and did not overfit the data. Therefore, we proceed with the linear regression model for the whole dataset by replacing ‘X_train’ with ‘X’. Given that the model has ‘seen’ the whole dataset, its forecast errors normally decrease. Therefore, we will save the trained model and use it for the new data which will be used in the optimization models in the next session.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Best model</span>
+<span class="n">regr</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">regrSummary</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;totalMAE&#39;</span><span class="p">,</span><span class="s1">&#39;totalMAPE&#39;</span><span class="p">,</span> <span class="s1">&#39;totalRMSE&#39;</span><span class="p">],</span> <span class="n">index</span> <span class="o">=</span> <span class="n">productList</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">upc</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+    <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+    <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span> <span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+    <span class="n">testMAE</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span>
+    <span class="n">testMAPE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">])</span> <span class="o">/</span> <span class="n">y</span><span class="p">[</span><span class="n">upc</span><span class="p">]))</span>
+    <span class="n">testRMSE</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">upc</span><span class="p">]))</span>
+    <span class="n">regrSummary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">upc</span><span class="p">]</span> <span class="o">=</span>  <span class="p">[</span><span class="n">testMAE</span><span class="p">,</span> <span class="n">testMAPE</span><span class="p">,</span> <span class="n">testRMSE</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best Model Summary&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average overall MAE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;totalMAE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average overall MAPE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;totalMAPE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average overall RMSE:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">regrSummary</span><span class="p">[</span><span class="s1">&#39;totalRMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Model Summary
+            totalMAE totalMAPE  totalRMSE
+1111085319  6.081658  0.643456   7.756732
+1111085350  5.804481      0.64   7.312385
+1600027527  9.773413  0.611309  16.926391
+1600027528   7.05949  0.302731  10.426074
+1600027564  5.990113  0.296792   8.303061
+3000006340  2.865248  0.699564   4.119918
+3800031829  6.164282  0.336052   7.810234
+average overall MAE:6.25
+average overall MAPE:0.5
+average overall RMSE:8.95
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-trained-models">
+<h2>Save trained models<a class="headerlink" href="#save-trained-models" title="Permalink to this heading">#</a></h2>
+<p>If you use Jupyter, you can save it to a local folder. The code below will put it in the current folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cwd</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can save the files to the folder indicated by using the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="c1"># save the models to the drive</span>
+<span class="k">for</span> <span class="n">upc</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">cwd</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">upc</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_demand_model.sav&#39;</span>
+    <span class="c1"># save the model to disk</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">regr</span><span class="p">[</span><span class="n">upc</span><span class="p">],</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Case1_1_Simple_Retail_Demand_Model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Demo: Simplified retail prediction pipeline for a single item</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Case1_3_Module1B_Retail_Demand_Predict.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Module 1B: Predicting demands from trained models for decision models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplement-plot-functions-this-is-a-pre-built-plot-function"><em>Supplement - Plot functions (this is a pre-built plot function)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-1-data-input">Block 1: Data input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-2-feature-engineering-preparation">Block 2: Feature engineering &amp; preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-model-algorithm-training-testing">Block 3: Model &amp; algorithm (training &amp; testing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-model-selection">Block 4: Model selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-trained-models">Save trained models</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yossiri Adulyasak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

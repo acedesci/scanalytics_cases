@@ -1,0 +1,1034 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Module 2B: Retail price optimization - Automated Implicit Model &#8212; Supply Chain Analytics - Case Studies and Demos with Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Case1_5_Module2B_Retail_Price_Optimization_Script';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Case: Online fulfillment - US online retail" href="Case2_online_fulfillment.html" />
+    <link rel="prev" title="Module 2A: Retail price optimization - Simple Explicit Model" href="Case1_4_Module2A_Retail_Price_Optimization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/sc_analytics_logo_small.png" class="logo__image only-light" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>
+    <script>document.write(`<img src="../_static/sc_analytics_logo_small.png" class="logo__image only-dark" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Case studies and Demos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Case1_retails_intro.html">Case: Retail analytics - Rue La La</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Case1_1_Simple_Retail_Demand_Model.html">Demo: Simplified retail prediction pipeline for a single item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_2_Module1A_Retail_Demand_Model.html">Module 1A: Retail predictive model pipeline for multiple items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_3_Module1B_Retail_Demand_Predict.html">Module 1B: Predicting demands from trained models for decision models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_4_Module2A_Retail_Price_Optimization.html">Module 2A: Retail price optimization - Simple Explicit Model</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Module 2B: Retail price optimization - Automated Implicit Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case2_online_fulfillment.html">Case: Online fulfillment - US online retail</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case2_1_Module1_Online_Fulfillment_Script.html">Demo: Online Fulfillment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case3_disruption_analytics.html">Case: Disruption Analytics - Ford Motor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case3_1_Disruption_Risk_Analytics.html">Demo: Supply Chain Distruption Risk Analytics</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Examples of Analytics Techniques in Supply Chains</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex_Lecture_Demo_Inventory_Sim.html">(R, s, S) Inventory Simulation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Ex_Bass_diffusion_full_demo.html">Bass Diffusion - full demo</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Case1_5_Module2B_Retail_Price_Optimization_Script.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 2B: Retail price optimization - Automated Implicit Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-1-data-input">Block 1: Data input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-2-prepare-input-parameters-for-the-model">Block 2: Prepare input parameters for the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-create-an-optimization-model">Block 3: Create an optimization model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-1-variable-declarations">Block 3.1: Variable declarations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-2-adding-an-objective-function">Block 3.2: Adding an objective function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-3-adding-constraints">Block 3.3: Adding constraints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-solution-and-results">Block 4: Solution and results</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-2b-retail-price-optimization-automated-implicit-model">
+<h1>Module 2B: Retail price optimization - Automated Implicit Model<a class="headerlink" href="#module-2b-retail-price-optimization-automated-implicit-model" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/acedesci/scanalytics/blob/master/EN/S08_09_Retail_Analytics/S9_Module2B_Retail_Price_Optimization_Script.ipynb"><strong>Link to Google Colab of this Notebook</strong></a></p>
+<p>This notebook is the script version of the Module2A (explicit model). Unlike the explicit model in which we need to explicitly add each complete equation one by one, we can automate the model generation process by using a script version of it. For this one, we do not expect that you understand in detail how to generate the script but simply understand what each block does. Creating the script would require some experience. The main purpose of this is to provide an example of real-life mathematical programming workflow which automate the prescriptive analytics process.</p>
+<p>More particularly, we want to create an <strong>implicit (or compact) model</strong> of the following prescriptive pricing model of Rue La La.</p>
+<img src="https://github.com/acedesci/scanalytics/blob/master/EN/S08_09_Retail_Analytics/implicit_model.png?raw=true" width="600">
+<p>The following blocks install Pyomo and solver. We also provide an option to use a more powerful solver <em>CBC</em> in addition to GLPK we used earlier. You can outcomment it if you want to switch to CBC.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Pyomo and GLPK in your Python environment first</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">pyomo</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">glpk</span>
+</pre></div>
+</div>
+<section id="block-1-data-input">
+<h2>Block 1: Data input<a class="headerlink" href="#block-1-data-input" title="Permalink to this heading">#</a></h2>
+<p>We prepared the data inputs in two files, i.e.,</p>
+<ol class="arabic simple">
+<li><p><strong>‘predictedSales_Prob1.csv’</strong>. This is a small scale problem. It is identical to the problem you see in the Module 2A (explicit model).</p></li>
+<li><p><strong>‘predictedSales_Prob2.csv’</strong>. This is a large-scale problem. This one contains a much higher number of variables and constraints to reflect real-life setting.</p></li>
+</ol>
+<p>Please mainly focus on the file <em>‘predictedSales_Prob1.csv’</em> since you will get to see the same model as Module_1A. You can also try <em>‘predictedSales_Prob2.csv’</em> if you are interested to see the large-scale model.</p>
+<p>In order to read the input, we take the file from the URL. This is the same file that you would obtain if you run the module 1B. If you want, you can change this block so that you can upload it from your PC or load it from Google Drive (see also Module 1B how these two options can be done).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+
+<span class="c1"># Prob1 is the same problem as Module 2A</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S08_09_Retail_Analytics/predictedSales_Prob1.csv&#39;</span>
+
+<span class="c1"># Prob2 is the large-scale problem</span>
+<span class="c1"># url = &#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S08_09_Retail_Analytics/predictedSales_Prob2.csv&#39;</span>
+
+<span class="n">predDemand</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1"># Dataset is now stored in a Pandas Dataframe predDemand</span>
+<span class="n">predDemand</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NA</th>
+      <th>avgPriceChoice</th>
+      <th>UPC</th>
+      <th>PRICE</th>
+      <th>PRICE_p2</th>
+      <th>FEATURE</th>
+      <th>DISPLAY</th>
+      <th>TPR_ONLY</th>
+      <th>RELPRICE</th>
+      <th>predictSales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3.0</td>
+      <td>1600027528</td>
+      <td>2.5</td>
+      <td>6.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.833333</td>
+      <td>95.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>3.0</td>
+      <td>1600027528</td>
+      <td>3.0</td>
+      <td>9.00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.000000</td>
+      <td>67.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>3.0</td>
+      <td>1600027528</td>
+      <td>3.5</td>
+      <td>12.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.166667</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>3.0</td>
+      <td>1600027564</td>
+      <td>2.5</td>
+      <td>6.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.833333</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>3.0</td>
+      <td>1600027564</td>
+      <td>3.0</td>
+      <td>9.00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.000000</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>3.0</td>
+      <td>1600027564</td>
+      <td>3.5</td>
+      <td>12.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.166667</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>3.0</td>
+      <td>3000006340</td>
+      <td>2.5</td>
+      <td>6.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.833333</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>3.0</td>
+      <td>3000006340</td>
+      <td>3.0</td>
+      <td>9.00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.000000</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>3.0</td>
+      <td>3000006340</td>
+      <td>3.5</td>
+      <td>12.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.166667</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>3.0</td>
+      <td>3800031829</td>
+      <td>2.5</td>
+      <td>6.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.833333</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>3.0</td>
+      <td>3800031829</td>
+      <td>3.0</td>
+      <td>9.00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.000000</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>3.0</td>
+      <td>3800031829</td>
+      <td>3.5</td>
+      <td>12.25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.166667</td>
+      <td>20.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>With the new dataset, we first need to check how many average price values are there because we need to run the optimization model for each value of the average price.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avgPriceList</span> <span class="o">=</span> <span class="n">predDemand</span><span class="p">[</span><span class="s1">&#39;avgPriceChoice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">inputColumns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;avgPriceChoice&#39;</span><span class="p">,</span> <span class="s1">&#39;UPC&#39;</span><span class="p">,</span> <span class="s1">&#39;PRICE&#39;</span><span class="p">,</span><span class="s1">&#39;predictSales&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Possible average price choices (k/N.Product):&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">avgPriceList</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Possible average price choices (k/N.Product):[3.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="block-2-prepare-input-parameters-for-the-model">
+<h2>Block 2: Prepare input parameters for the model<a class="headerlink" href="#block-2-prepare-input-parameters-for-the-model" title="Permalink to this heading">#</a></h2>
+<p>We can choose which value of <span class="math notranslate nohighlight">\(k\)</span> we want to use in the optimization model from the <em>avgPriceChoice</em> we have in the dataset. In <em>‘predictedSales_Prob1.csv’</em>, there is only one average price choice at $3.0 whereas in <em>‘predictedSales_Prob2.csv’</em> there are 4 different price choices you can choose form.</p>
+<p>If you want to try different average price choices, we would need to repeat this procedure for each average price value and record the corresponding optimal solution to decide how each product should be priced and at which average price level to generate the optimal revenue.</p>
+<p>Note that in this demo, we use <span class="math notranslate nohighlight">\(p_{ij}\)</span> instead of <span class="math notranslate nohighlight">\(p_{j}\)</span> since it is easier to prepare the script but the model remains identical to the Module 2A because <span class="math notranslate nohighlight">\(p_{ij} = p_{j},i=1,...,n\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nere we choose which value of k (avgPriceValue x N. of products) we would like to use in the model</span>
+<span class="c1"># Note that k must be among the choices where the prediction has been prepared</span>
+<span class="n">avgPriceValue</span> <span class="o">=</span>  <span class="n">avgPriceList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Now we select only the row which corresponds to the previously chosen value of avgPriceValue (again k = avgPriceValue x N. of products)</span>
+<span class="n">predDemand_k</span> <span class="o">=</span> <span class="n">predDemand</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">predDemand</span><span class="p">[</span><span class="s1">&#39;avgPriceChoice&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">avgPriceValue</span><span class="p">][</span><span class="n">inputColumns</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predDemand_k</span><span class="p">)</span>
+<span class="n">productList</span> <span class="o">=</span> <span class="n">predDemand_k</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">priceList</span> <span class="o">=</span> <span class="n">predDemand_k</span><span class="p">[</span><span class="s1">&#39;PRICE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="c1"># Here we prepare the dictionary to be used in the optimization model</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">D</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">upc</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+  <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">priceList</span><span class="p">:</span>
+    <span class="n">p</span><span class="p">[(</span><span class="n">upc</span><span class="p">,</span><span class="n">price</span><span class="p">)]</span> <span class="o">=</span> <span class="n">price</span>
+    <span class="n">D</span><span class="p">[(</span><span class="n">upc</span><span class="p">,</span><span class="n">price</span><span class="p">)]</span> <span class="o">=</span> <span class="n">predDemand_k</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">predDemand</span><span class="p">[</span><span class="s1">&#39;UPC&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">upc</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">predDemand_k</span><span class="p">[</span><span class="s1">&#39;PRICE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">price</span><span class="p">)][</span><span class="s1">&#39;predictSales&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    avgPriceChoice         UPC  PRICE  predictSales
+0              3.0  1600027528    2.5          95.0
+1              3.0  1600027528    3.0          67.0
+2              3.0  1600027528    3.5          46.0
+3              3.0  1600027564    2.5          24.0
+4              3.0  1600027564    3.0          23.0
+5              3.0  1600027564    3.5          20.0
+6              3.0  3000006340    2.5           6.0
+7              3.0  3000006340    3.0           4.0
+8              3.0  3000006340    3.5           3.0
+9              3.0  3800031829    2.5          33.0
+10             3.0  3800031829    3.0          24.0
+11             3.0  3800031829    3.5          20.0
+{(1600027528, 2.5): 2.5, (1600027528, 3.0): 3.0, (1600027528, 3.5): 3.5, (1600027564, 2.5): 2.5, (1600027564, 3.0): 3.0, (1600027564, 3.5): 3.5, (3000006340, 2.5): 2.5, (3000006340, 3.0): 3.0, (3000006340, 3.5): 3.5, (3800031829, 2.5): 2.5, (3800031829, 3.0): 3.0, (3800031829, 3.5): 3.5}
+{(1600027528, 2.5): 95.0, (1600027528, 3.0): 67.0, (1600027528, 3.5): 46.0, (1600027564, 2.5): 24.0, (1600027564, 3.0): 23.0, (1600027564, 3.5): 20.0, (3000006340, 2.5): 6.0, (3000006340, 3.0): 4.0, (3000006340, 3.5): 3.0, (3800031829, 2.5): 33.0, (3800031829, 3.0): 24.0, (3800031829, 3.5): 20.0}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="block-3-create-an-optimization-model">
+<h2>Block 3: Create an optimization model<a class="headerlink" href="#block-3-create-an-optimization-model" title="Permalink to this heading">#</a></h2>
+<section id="block-3-1-variable-declarations">
+<h3>Block 3.1: Variable declarations<a class="headerlink" href="#block-3-1-variable-declarations" title="Permalink to this heading">#</a></h3>
+<p>Unlike the first part of today’s session, we index the decision variables and demand parameters by the product and the price themselves rather than their index. Indeed, we previously denoted <span class="math notranslate nohighlight">\(x_{ij}=1\)</span> if the price option <span class="math notranslate nohighlight">\(j\)</span> is chosen for product <span class="math notranslate nohighlight">\(i\)</span>, and 0 otherwise. Now, our variable is denoted by <span class="math notranslate nohighlight">\(x_{1600027528,\ 3.0}=1\)</span>, which means that product UPC ‘1600027528’ will be sold at 3.0 dollars. The same notational remark applies to predicted demand (<span class="math notranslate nohighlight">\(D_{ijk}\)</span>) for the sum of prices <span class="math notranslate nohighlight">\(k\)</span> and price (<span class="math notranslate nohighlight">\(p_{ij}\)</span>) parameters. We can declare the constraint sets first (model.PriceChoiceUPC, model.sumPrice) and then <strong>add</strong> the constraint functions later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyomo.environ</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">iIndexList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">productList</span><span class="p">)))</span>
+<span class="n">jIndexList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">priceList</span><span class="p">)))</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ConcreteModel</span><span class="p">()</span>
+<span class="c1"># Variables</span>
+<span class="n">model</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">productList</span><span class="p">,</span> <span class="n">priceList</span><span class="p">,</span> <span class="n">within</span> <span class="o">=</span> <span class="n">Binary</span><span class="p">)</span>
+
+<span class="c1"># Constraints</span>
+<span class="n">model</span><span class="o">.</span><span class="n">PriceChoiceUPC</span> <span class="o">=</span> <span class="n">ConstraintList</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">sumPrice</span> <span class="o">=</span> <span class="n">ConstraintList</span><span class="p">()</span>
+
+<span class="c1"># Print to review the model (equations are still not included)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Set Declarations
+    PriceChoiceUPC_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    0 :      {}
+    sumPrice_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    0 :      {}
+    x_index : Size=1, Index=None, Ordered=False
+        Key  : Dimen : Domain              : Size : Members
+        None :     2 : x_index_0*x_index_1 :   12 : {(1600027528, 2.5), (1600027528, 3.0), (1600027528, 3.5), (1600027564, 2.5), (1600027564, 3.0), (1600027564, 3.5), (3000006340, 2.5), (3000006340, 3.0), (3000006340, 3.5), (3800031829, 2.5), (3800031829, 3.0), (3800031829, 3.5)}
+    x_index_0 : Size=1, Index=None, Ordered=False
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    4 : {1600027528, 1600027564, 3000006340, 3800031829}
+    x_index_1 : Size=1, Index=None, Ordered=False
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    3 : {2.5, 3.0, 3.5}
+
+1 Var Declarations
+    x : Size=12, Index=x_index
+        Key               : Lower : Value : Upper : Fixed : Stale : Domain
+        (1600027528, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (1600027528, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (1600027528, 3.5) :     0 :  None :     1 : False :  True : Binary
+        (1600027564, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (1600027564, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (1600027564, 3.5) :     0 :  None :     1 : False :  True : Binary
+        (3000006340, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (3000006340, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (3000006340, 3.5) :     0 :  None :     1 : False :  True : Binary
+        (3800031829, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (3800031829, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (3800031829, 3.5) :     0 :  None :     1 : False :  True : Binary
+
+2 Constraint Declarations
+    PriceChoiceUPC : Size=0, Index=PriceChoiceUPC_index, Active=True
+        Key : Lower : Body : Upper : Active
+    sumPrice : Size=0, Index=sumPrice_index, Active=True
+        Key : Lower : Body : Upper : Active
+
+8 Declarations: x_index_0 x_index_1 x_index x PriceChoiceUPC_index PriceChoiceUPC sumPrice_index sumPrice
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="block-3-2-adding-an-objective-function">
+<h3>Block 3.2: Adding an objective function<a class="headerlink" href="#block-3-2-adding-an-objective-function" title="Permalink to this heading">#</a></h3>
+<p>Instead of iteratively entering the value for each price and predicted sales, we can simply create a loop <strong>for</strong> each product and a loop <strong>for</strong> each price. The code now looks very much like the general equation <span class="math notranslate nohighlight">\(\sum_{i} \sum_{j} p_{ij} \cdot D_{ijk} \cdot x_{ij}\)</span> we saw in the first part of today’s session with some minor changes for notational simplification.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Objective function</span>
+
+<span class="n">obj_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">*</span><span class="n">D</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">productList</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">priceList</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">obj_expr</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">OBJ</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">obj_expr</span><span class="p">,</span> <span class="n">sense</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>237.5*x[1600027528,2.5] + 201.0*x[1600027528,3.0] + 161.0*x[1600027528,3.5] + 60.0*x[1600027564,2.5] + 69.0*x[1600027564,3.0] + 70.0*x[1600027564,3.5] + 15.0*x[3000006340,2.5] + 12.0*x[3000006340,3.0] + 10.5*x[3000006340,3.5] + 82.5*x[3800031829,2.5] + 72.0*x[3800031829,3.0] + 70.0*x[3800031829,3.5]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="block-3-3-adding-constraints">
+<h3>Block 3.3: Adding constraints<a class="headerlink" href="#block-3-3-adding-constraints" title="Permalink to this heading">#</a></h3>
+<p><strong>Constraint 1: One price choice must be selected for each product</strong></p>
+<p>Similarly, we can create a loop to <strong>add</strong> constraint functions to the constraint set <strong>for</strong> each product to ensure that only one price on the list is selected for that product. Unlike the first part of today’s session, we need not iteratively type each constraint.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constraints #1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+  <span class="n">const1_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">priceList</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">const1_expr</span><span class="p">)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">PriceChoiceUPC</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">const1_expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x[1600027528,2.5] + x[1600027528,3.0] + x[1600027528,3.5]  ==  1
+x[1600027564,2.5] + x[1600027564,3.0] + x[1600027564,3.5]  ==  1
+x[3000006340,2.5] + x[3000006340,3.0] + x[3000006340,3.5]  ==  1
+x[3800031829,2.5] + x[3800031829,3.0] + x[3800031829,3.5]  ==  1
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Constraint 2: The sum of the prices of all products must equal <span class="math notranslate nohighlight">\(k\)</span></strong></p>
+<p>Similar <strong>for</strong> loops apply to the average price constraint. Please refer to the first part of today’s session for detailed elaboration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constraints #2</span>
+<span class="n">const2_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">productList</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">priceList</span><span class="p">)</span> <span class="o">==</span> <span class="n">avgPriceValue</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">productList</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">const2_expr</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">sumPrice</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">const2_expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5*x[1600027528,2.5] + 3.0*x[1600027528,3.0] + 3.5*x[1600027528,3.5] + 2.5*x[1600027564,2.5] + 3.0*x[1600027564,3.0] + 3.5*x[1600027564,3.5] + 2.5*x[3000006340,2.5] + 3.0*x[3000006340,3.0] + 3.5*x[3000006340,3.5] + 2.5*x[3800031829,2.5] + 3.0*x[3800031829,3.0] + 3.5*x[3800031829,3.5]  ==  12.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyomo.core.base.constraint._GeneralConstraintData at 0x2590bd2c580&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can print the model to review prior to solving it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Set Declarations
+    PriceChoiceUPC_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    4 : {1, 2, 3, 4}
+    sumPrice_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    1 :    {1,}
+    x_index : Size=1, Index=None, Ordered=False
+        Key  : Dimen : Domain              : Size : Members
+        None :     2 : x_index_0*x_index_1 :   12 : {(1600027528, 2.5), (1600027528, 3.0), (1600027528, 3.5), (1600027564, 2.5), (1600027564, 3.0), (1600027564, 3.5), (3000006340, 2.5), (3000006340, 3.0), (3000006340, 3.5), (3800031829, 2.5), (3800031829, 3.0), (3800031829, 3.5)}
+    x_index_0 : Size=1, Index=None, Ordered=False
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    4 : {1600027528, 1600027564, 3000006340, 3800031829}
+    x_index_1 : Size=1, Index=None, Ordered=False
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    3 : {2.5, 3.0, 3.5}
+
+1 Var Declarations
+    x : Size=12, Index=x_index
+        Key               : Lower : Value : Upper : Fixed : Stale : Domain
+        (1600027528, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (1600027528, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (1600027528, 3.5) :     0 :  None :     1 : False :  True : Binary
+        (1600027564, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (1600027564, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (1600027564, 3.5) :     0 :  None :     1 : False :  True : Binary
+        (3000006340, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (3000006340, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (3000006340, 3.5) :     0 :  None :     1 : False :  True : Binary
+        (3800031829, 2.5) :     0 :  None :     1 : False :  True : Binary
+        (3800031829, 3.0) :     0 :  None :     1 : False :  True : Binary
+        (3800031829, 3.5) :     0 :  None :     1 : False :  True : Binary
+
+1 Objective Declarations
+    OBJ : Size=1, Index=None, Active=True
+        Key  : Active : Sense    : Expression
+        None :   True : maximize : 237.5*x[1600027528,2.5] + 201.0*x[1600027528,3.0] + 161.0*x[1600027528,3.5] + 60.0*x[1600027564,2.5] + 69.0*x[1600027564,3.0] + 70.0*x[1600027564,3.5] + 15.0*x[3000006340,2.5] + 12.0*x[3000006340,3.0] + 10.5*x[3000006340,3.5] + 82.5*x[3800031829,2.5] + 72.0*x[3800031829,3.0] + 70.0*x[3800031829,3.5]
+
+2 Constraint Declarations
+    PriceChoiceUPC : Size=4, Index=PriceChoiceUPC_index, Active=True
+        Key : Lower : Body                                                      : Upper : Active
+          1 :   1.0 : x[1600027528,2.5] + x[1600027528,3.0] + x[1600027528,3.5] :   1.0 :   True
+          2 :   1.0 : x[1600027564,2.5] + x[1600027564,3.0] + x[1600027564,3.5] :   1.0 :   True
+          3 :   1.0 : x[3000006340,2.5] + x[3000006340,3.0] + x[3000006340,3.5] :   1.0 :   True
+          4 :   1.0 : x[3800031829,2.5] + x[3800031829,3.0] + x[3800031829,3.5] :   1.0 :   True
+    sumPrice : Size=1, Index=sumPrice_index, Active=True
+        Key : Lower : Body                                                                                                                                                                                                                                                                                          : Upper : Active
+          1 :  12.0 : 2.5*x[1600027528,2.5] + 3.0*x[1600027528,3.0] + 3.5*x[1600027528,3.5] + 2.5*x[1600027564,2.5] + 3.0*x[1600027564,3.0] + 3.5*x[1600027564,3.5] + 2.5*x[3000006340,2.5] + 3.0*x[3000006340,3.0] + 3.5*x[3000006340,3.5] + 2.5*x[3800031829,2.5] + 3.0*x[3800031829,3.0] + 3.5*x[3800031829,3.5] :  12.0 :   True
+
+9 Declarations: x_index_0 x_index_1 x_index x PriceChoiceUPC_index PriceChoiceUPC sumPrice_index sumPrice OBJ
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="block-4-solution-and-results">
+<h2>Block 4: Solution and results<a class="headerlink" href="#block-4-solution-and-results" title="Permalink to this heading">#</a></h2>
+<p>Finally, we call the solver and obtain the optimal solution. We can see that product ‘1600027528’ is also sold at price <span class="math notranslate nohighlight">\(\$2.5\)</span>, products ‘1600027564’ and ‘3000006340’ both  at price <span class="math notranslate nohighlight">\(\$3.5\)</span> and product ‘3800031829’ at price <span class="math notranslate nohighlight">\(\$2.5\)</span>, but the optimal objective value is now <span class="math notranslate nohighlight">\(\$399.3\)</span>. The objective function value is slightly different from the Module_2A but the solution (values of <span class="math notranslate nohighlight">\(x\)</span>) is the same. This is due to the fact that we keep more digits in this example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve the model</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;glpk&#39;</span><span class="p">)</span>
+<span class="n">opt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model unknown
+
+  Variables:
+    x : Size=12, Index=x_index
+        Key               : Lower : Value : Upper : Fixed : Stale : Domain
+        (1600027528, 2.5) :     0 :   1.0 :     1 : False : False : Binary
+        (1600027528, 3.0) :     0 :   0.0 :     1 : False : False : Binary
+        (1600027528, 3.5) :     0 :   0.0 :     1 : False : False : Binary
+        (1600027564, 2.5) :     0 :   0.0 :     1 : False : False : Binary
+        (1600027564, 3.0) :     0 :   0.0 :     1 : False : False : Binary
+        (1600027564, 3.5) :     0 :   1.0 :     1 : False : False : Binary
+        (3000006340, 2.5) :     0 :   0.0 :     1 : False : False : Binary
+        (3000006340, 3.0) :     0 :   0.0 :     1 : False : False : Binary
+        (3000006340, 3.5) :     0 :   1.0 :     1 : False : False : Binary
+        (3800031829, 2.5) :     0 :   1.0 :     1 : False : False : Binary
+        (3800031829, 3.0) :     0 :   0.0 :     1 : False : False : Binary
+        (3800031829, 3.5) :     0 :   0.0 :     1 : False : False : Binary
+
+  Objectives:
+    OBJ : Size=1, Index=None, Active=True
+        Key  : Active : Value
+        None :   True : 400.5
+
+  Constraints:
+    PriceChoiceUPC : Size=4
+        Key : Lower : Body : Upper
+          1 :   1.0 :  1.0 :   1.0
+          2 :   1.0 :  1.0 :   1.0
+          3 :   1.0 :  1.0 :   1.0
+          4 :   1.0 :  1.0 :   1.0
+    sumPrice : Size=1
+        Key : Lower : Body : Upper
+          1 :  12.0 : 12.0 :  12.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Case1_4_Module2A_Retail_Price_Optimization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Module 2A: Retail price optimization - Simple Explicit Model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Case2_online_fulfillment.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Case: Online fulfillment - US online retail</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-1-data-input">Block 1: Data input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-2-prepare-input-parameters-for-the-model">Block 2: Prepare input parameters for the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-create-an-optimization-model">Block 3: Create an optimization model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-1-variable-declarations">Block 3.1: Variable declarations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-2-adding-an-objective-function">Block 3.2: Adding an objective function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-3-adding-constraints">Block 3.3: Adding constraints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-solution-and-results">Block 4: Solution and results</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yossiri Adulyasak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

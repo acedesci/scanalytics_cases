@@ -1,0 +1,1599 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Demo: Bass Diffusion Model &#8212; Supply Chain Analytics - Case Studies and Demos with Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Ex_Bass_diffusion_full_demo';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="(R, s, S) Inventory Simulation" href="Ex_Lecture_Demo_Inventory_Sim.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/sc_analytics_logo_small.png" class="logo__image only-light" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>
+    <script>document.write(`<img src="../_static/sc_analytics_logo_small.png" class="logo__image only-dark" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Case studies and Demos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case1_retails_intro.html">Case: Retail analytics - Rue La La</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case1_1_Simple_Retail_Demand_Model.html">Demo: Simplified retail prediction pipeline for a single item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_2_Module1A_Retail_Demand_Model.html">Module 1A: Retail predictive model pipeline for multiple items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_3_Module1B_Retail_Demand_Predict.html">Module 1B: Predicting demands from trained models for decision models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_4_Module2A_Retail_Price_Optimization.html">Module 2A: Retail price optimization - Simple Explicit Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_5_Module2B_Retail_Price_Optimization_Script.html">Module 2B: Retail price optimization - Automated Implicit Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case2_online_fulfillment.html">Case: Online fulfillment - US online retail</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case2_1_Module1_Online_Fulfillment_Script.html">Demo: Online Fulfillment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case3_disruption_analytics.html">Case: Disruption Analytics - Ford Motor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case3_1_Disruption_Risk_Analytics.html">Demo: Supply Chain Distruption Risk Analytics</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Examples of Analytics Techniques in Supply Chains</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex_Lecture_Demo_Inventory_Sim.html">(R, s, S) Inventory Simulation</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Demo: Bass Diffusion Model</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Ex_Bass_diffusion_full_demo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Demo: Bass Diffusion Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-for-bass-parameters-estimation">Regression for Bass parameters estimation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="demo-bass-diffusion-model">
+<h1>Demo: Bass Diffusion Model<a class="headerlink" href="#demo-bass-diffusion-model" title="Permalink to this heading">#</a></h1>
+<p>The Bass diffusion model is a mathematical model used to predict the adoption rate of a new product over time. It is based on the idea that the rate of adoption of a new product is influenced by both external factors (like marketing and advertising) and internal factors (like word-of-mouth and social influence).</p>
+<p>The model has several key properties:</p>
+<ul class="simple">
+<li><p><strong>S-shaped curve:</strong> The adoption rate typically follows an S-shaped curve, with a slow start, a rapid growth period, and then a gradual decline.</p></li>
+<li><p><strong>Diminishing returns:</strong> As more people adopt the product, the rate of adoption slows down.</p></li>
+<li><p><strong>Threshold effect:</strong> There is a threshold level of adoption above which the product becomes self-sustaining, and the adoption rate accelerates.</p></li>
+</ul>
+<p>The Bass diffusion model has been widely used in marketing, economics, and sociology to predict the adoption of new products and technologies. It has also been applied to other areas, such as forecasting the spread of diseases, the adoption of new policies, and the diffusion of innovations in agriculture.</p>
+<p>While the Bass diffusion model is a powerful tool for predicting adoption rates, it is important to note that it has limitations. For example, it assumes that all potential adopters are identical, which may not be the case in reality. Additionally, the model does not account for external factors, such as economic conditions or changes in consumer preferences, that can affect adoption rates.</p>
+<p>Despite these limitations, the Bass diffusion model remains a valuable tool for understanding and predicting the adoption of new products. By understanding the factors that influence adoption rates, businesses can develop more effective marketing strategies and make better decisions about product development and launch.</p>
+<blockquote>
+The cumulative number of adoptors (people who bought/adopted the product) $S(t)$ from the beginning (time 0) to time $t$ is described by $S(t) = m\times F(t)$ where $m$ is the market size (the estimated total number of potential customers) and $F(t)$ is the <i>cumulative</i> probability that an individual (potential customer) has already adopted the product by time $t$ (which needs to be calculated).
+We can obtain $F(t)$ as a function of $p$ and $q$ as follows:
+<div class="math notranslate nohighlight">
+\[F(t) = \frac{1-e^{-(p+q)t}}{1+\frac{q}{p}e^{-(p+q)t}} \]</div>
+<p>where
+<br /></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p\)</span> is the coefficiant of innovation
+<br /></p></li>
+<li><p><span class="math notranslate nohighlight">\(q\)</span> is the coefficient of imitation
+<br /></p></li>
+</ul>
+<p>In addition, the probability of adoption by an individual at time <span class="math notranslate nohighlight">\(t\)</span> which is represented by <span class="math notranslate nohighlight">\(f(t)\)</span> (recall that <span class="math notranslate nohighlight">\(f(t) = \frac{d}{dt}F(t)\)</span>) can be calculated as follows:</p>
+<p>$<span class="math notranslate nohighlight">\(f(t) = \frac{d}{dt}F(t) = \frac{e^{((p+q)t)}p(p+q)^2}{[pe^{((p+q)t)}+q]^2} \)</span>$.</p>
+<p>Consequently, the estimated number of adoptions in each period can be calculated as  <span class="math notranslate nohighlight">\(s(t) = m\times f(t)\)</span></p>
+</blockquote>
+<p>We have then prepared the following two functions to calculate <span class="math notranslate nohighlight">\(F(t)\)</span> and <span class="math notranslate nohighlight">\(f(t)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="k">def</span> <span class="nf">Bass_cumulative_probability_Ft</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">Bass_probability_ft</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">p</span><span class="o">+</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">q</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">p</span><span class="o">+</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">q</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on the values of <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(m\)</span> of the quarterly sales of iPhone provided in the code cell below, please compute the values of the estimated probability of adoption <span class="math notranslate nohighlight">\(f(t)\)</span>, cumulative probability of adoption <span class="math notranslate nohighlight">\(F(t)\)</span>, the number of adoptions <span class="math notranslate nohighlight">\(s(t) = m\times f(t)\)</span>, and cumulative number of adoptions <span class="math notranslate nohighlight">\(S(t) = m\times F(t)\)</span> for each quarter, which is indexed by <span class="math notranslate nohighlight">\(t\)</span>. Note that the first column below is an index whereas the subsequent four columns contain the corresponding values of the estimations based on Bass diffusion model.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Quarter_Index</p></th>
+<th class="head text-left"><p>ft</p></th>
+<th class="head text-left"><p>Ft</p></th>
+<th class="head text-left"><p>st</p></th>
+<th class="head text-left"><p>St</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>…</p></td>
+<td class="text-left"><p>…</p></td>
+<td class="text-left"><p>…</p></td>
+<td class="text-left"><p>…</p></td>
+<td class="text-left"><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<section id="regression-for-bass-parameters-estimation">
+<h2>Regression for Bass parameters estimation<a class="headerlink" href="#regression-for-bass-parameters-estimation" title="Permalink to this heading">#</a></h2>
+<p><strong>Estimating Bass diffusion model parameters</strong></p>
+<p>We can now complete the Bass diffusion model pipeline by first estimating the parameters <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(m\)</span> from the data prior to performing prediction. First we load the modules which are required as well as the actual data of sales of iPhone. The regression model for parameters estimation is presented in the paper below (Section “Discrete Analogue”).</p>
+<p><b>Reference</b>: Bass, F. M. (1969). A new product growth for model consumer durables. Management science, 15(5), 215-227.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S04_Data_Structures_2/iphone_quarter_sales.csv&#39;</span>
+<span class="n">actual_sales</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Quarter&#39;</span><span class="p">)</span>
+<span class="n">actual_sales</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sales</th>
+    </tr>
+    <tr>
+      <th>Quarter</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.270</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.119</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.315</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.703</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.717</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We would first determine the coefficients for the Bass diffusion model in order to perform the prediction as seen in the previous session. The Bass model in a basic form, can be written as:</p>
+<p><span class="math notranslate nohighlight">\(s(t) = pm + (q-p)S(t) - \frac{q}{m}S(t)^2\)</span></p>
+<p>which can be solved by a regression function. Here we will use the following equation (note that we do not shift one period like in the paper since the period is a bit long).</p>
+<p><span class="math notranslate nohighlight">\(s(t) = a + bS(t) + cS(t)^2\)</span></p>
+<p>Correspondingly, we can obtain <span class="math notranslate nohighlight">\(m = \frac{-b \pm \sqrt{b^2-4ac}}{2c}\)</span> (<span class="math notranslate nohighlight">\(m\)</span> must be positive), <span class="math notranslate nohighlight">\(p = a/m\)</span> and <span class="math notranslate nohighlight">\(q = -mc\)</span> (for the detailed proof, you can review the Section “Discrete Analogue” in the paper).</p>
+<p>In the steps below, we demonstrate how this can be done using the linear regression model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="c1"># we need to prepare the inputs from sales by taking the cumulative sum up until period T - 1</span>
+
+<span class="nb">input</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actual_sales</span><span class="p">[</span><span class="s2">&quot;Sales&quot;</span><span class="p">]</span>
+<span class="nb">input</span><span class="p">[</span><span class="s2">&quot;cumulative_sales&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">actual_sales</span><span class="p">[</span><span class="s2">&quot;Sales&quot;</span><span class="p">])</span>
+<span class="nb">input</span><span class="p">[</span><span class="s2">&quot;cumulative_sales_sq&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;cumulative_sales&quot;</span><span class="p">]]</span>
+<span class="nb">input</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sales</th>
+      <th>cumulative_sales</th>
+      <th>cumulative_sales_sq</th>
+    </tr>
+    <tr>
+      <th>Quarter</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.270</td>
+      <td>0.270</td>
+      <td>0.072900</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.119</td>
+      <td>1.389</td>
+      <td>1.929321</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.315</td>
+      <td>3.704</td>
+      <td>13.719616</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.703</td>
+      <td>5.407</td>
+      <td>29.235649</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.717</td>
+      <td>6.124</td>
+      <td>37.503376</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we can use linear regression to determine <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(c\)</span> of the regression function above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[[</span><span class="s2">&quot;cumulative_sales&quot;</span><span class="p">,</span><span class="s2">&quot;cumulative_sales_sq&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">]</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;intercept: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;coefficients: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>intercept: 3.6726987894801724
+coefficients: [ 1.15612351e-01 -6.23837858e-05]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Following the results, we can obtain</p>
+<p><span class="math notranslate nohighlight">\(m = \frac{-b \pm \sqrt{b^2-4ac}}{2c}\)</span></p>
+<p>and <span class="math notranslate nohighlight">\(m\)</span> (the size of potential customer base) must be positive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># determine m</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">+</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">m2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;m1 = &quot;</span><span class="p">,</span> <span class="n">m1</span><span class="p">,</span> <span class="s2">&quot;, m2 = &quot;</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="s2">&quot;m = &quot;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m1 =  -31.24072191263632 , m2 =  1884.4843034859591 m =  1884.4843034859591
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, we can directly obtain <span class="math notranslate nohighlight">\(p = a/m\)</span> and <span class="math notranslate nohighlight">\(q = -mc\)</span> for the Bass diffusion model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">m</span>
+<span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">c</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;m = &quot;</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="s2">&quot;, p = &quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;q = &quot;</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m =  1884.4843034859591 , p =  0.0019489145028623142 q =  0.11756126506137607
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below are some examples of how different outputs can be generated by the Bass diffusion model.</p>
+<p><strong>Question 1</strong>: Please compute the values as indicated in the table above for the first 40 quarters of the sales (i.e., 10 years) using the parameters provided. The index of the quarter must be from <span class="math notranslate nohighlight">\(0 \rightarrow 39\)</span> (i.e., the first quarter is considered period <span class="math notranslate nohighlight">\(t=0\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ft&#39;</span><span class="p">,</span><span class="s1">&#39;Ft&#39;</span><span class="p">,</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;St&#39;</span><span class="p">]</span>
+<span class="n">quarter_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+<span class="n">bass_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="n">quarter_index</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
+<span class="n">bass_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Quarter&#39;</span>
+
+<span class="c1">### start your code here ###</span>
+<span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;ft&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bass_probability_ft</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">bass_df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;Ft&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bass_cumulative_probability_Ft</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">bass_df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">*</span><span class="n">bass_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">t</span><span class="p">,</span><span class="s1">&#39;ft&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">bass_df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;St&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">*</span><span class="n">bass_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">t</span><span class="p">,</span><span class="s1">&#39;Ft&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">bass_df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="c1">### end your code here ###</span>
+
+<span class="n">bass_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ft</th>
+      <th>Ft</th>
+      <th>st</th>
+      <th>St</th>
+    </tr>
+    <tr>
+      <th>Quarter</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.001949</td>
+      <td>0.000000</td>
+      <td>3.672699</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.002187</td>
+      <td>0.002066</td>
+      <td>4.121845</td>
+      <td>3.893112</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.002453</td>
+      <td>0.004384</td>
+      <td>4.623538</td>
+      <td>8.261201</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.002751</td>
+      <td>0.006983</td>
+      <td>5.183301</td>
+      <td>13.159540</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.003082</td>
+      <td>0.009896</td>
+      <td>5.807073</td>
+      <td>18.649135</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.003450</td>
+      <td>0.013159</td>
+      <td>6.501194</td>
+      <td>24.797131</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.003859</td>
+      <td>0.016809</td>
+      <td>7.272376</td>
+      <td>31.677206</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.004313</td>
+      <td>0.020892</td>
+      <td>8.127653</td>
+      <td>39.369912</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.004815</td>
+      <td>0.025452</td>
+      <td>9.074300</td>
+      <td>47.962967</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.005370</td>
+      <td>0.030540</td>
+      <td>10.119730</td>
+      <td>57.551440</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.005981</td>
+      <td>0.036210</td>
+      <td>11.271350</td>
+      <td>68.237826</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.006652</td>
+      <td>0.042522</td>
+      <td>12.536367</td>
+      <td>80.131944</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.007387</td>
+      <td>0.049536</td>
+      <td>13.921550</td>
+      <td>93.350623</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.008189</td>
+      <td>0.057319</td>
+      <td>15.432937</td>
+      <td>108.017124</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.009061</td>
+      <td>0.065939</td>
+      <td>17.075473</td>
+      <td>124.260231</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.010004</td>
+      <td>0.075465</td>
+      <td>18.852590</td>
+      <td>142.212953</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.011019</td>
+      <td>0.085971</td>
+      <td>20.765728</td>
+      <td>162.010779</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.012106</td>
+      <td>0.097528</td>
+      <td>22.813792</td>
+      <td>183.789418</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.013262</td>
+      <td>0.110206</td>
+      <td>24.992575</td>
+      <td>207.681977</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.014484</td>
+      <td>0.124074</td>
+      <td>27.294161</td>
+      <td>233.815550</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.015764</td>
+      <td>0.139193</td>
+      <td>29.706331</td>
+      <td>262.307214</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.017093</td>
+      <td>0.155618</td>
+      <td>32.212039</td>
+      <td>293.259450</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.018461</td>
+      <td>0.173392</td>
+      <td>34.788976</td>
+      <td>326.755096</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.019851</td>
+      <td>0.192547</td>
+      <td>37.409319</td>
+      <td>362.851933</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.021247</td>
+      <td>0.213097</td>
+      <td>40.039705</td>
+      <td>401.577141</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.022628</td>
+      <td>0.235036</td>
+      <td>42.641499</td>
+      <td>442.921864</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0.023970</td>
+      <td>0.258339</td>
+      <td>45.171429</td>
+      <td>486.836225</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.025250</td>
+      <td>0.282955</td>
+      <td>47.582589</td>
+      <td>533.225157</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.026440</td>
+      <td>0.308809</td>
+      <td>49.825855</td>
+      <td>581.945444</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0.027515</td>
+      <td>0.335797</td>
+      <td>51.851650</td>
+      <td>632.804359</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>0.028449</td>
+      <td>0.363792</td>
+      <td>53.611996</td>
+      <td>685.560219</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>0.029219</td>
+      <td>0.392641</td>
+      <td>55.062732</td>
+      <td>739.925081</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>0.029804</td>
+      <td>0.422168</td>
+      <td>56.165740</td>
+      <td>795.569684</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>0.030189</td>
+      <td>0.452182</td>
+      <td>56.890996</td>
+      <td>852.130535</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>0.030363</td>
+      <td>0.482476</td>
+      <td>57.218267</td>
+      <td>909.218892</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>0.030320</td>
+      <td>0.512836</td>
+      <td>57.138295</td>
+      <td>966.431192</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>0.030063</td>
+      <td>0.543045</td>
+      <td>56.653351</td>
+      <td>1023.360364</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>0.029598</td>
+      <td>0.572893</td>
+      <td>55.777094</td>
+      <td>1079.607339</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>0.028938</td>
+      <td>0.602176</td>
+      <td>54.533767</td>
+      <td>1134.792093</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>0.028101</td>
+      <td>0.630710</td>
+      <td>52.956791</td>
+      <td>1188.563574</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Question 2</strong>: Please (i) plot the columns <code class="docutils literal notranslate"><span class="pre">['ft','Ft']</span></code> in a single plot using line plot (parameter <code class="docutils literal notranslate"><span class="pre">kind='line'</span></code>) and (ii) plot the columns <code class="docutils literal notranslate"><span class="pre">['st','St']</span></code> in a single plot using bar plot (parameter <code class="docutils literal notranslate"><span class="pre">kind='bar'</span></code>). You can also indicate the plot size using the parameter <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(12,4)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### start your code here ###</span>
+<span class="n">bass_df</span><span class="p">[[</span><span class="s1">&#39;ft&#39;</span><span class="p">,</span><span class="s1">&#39;Ft&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">bass_df</span><span class="p">[[</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;St&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="c1">### end your code here ###</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Quarter&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/9da4dc4e3a3d5ebe4ca34c277a63ecb5ea47eea75d2872b8cc204615e0b3f081.png" src="../_images/9da4dc4e3a3d5ebe4ca34c277a63ecb5ea47eea75d2872b8cc204615e0b3f081.png" />
+<img alt="../_images/88b2a13d729e5bfae609ce26eef85d439475ebc7458007a74a8e0702b7e6226c.png" src="../_images/88b2a13d729e5bfae609ce26eef85d439475ebc7458007a74a8e0702b7e6226c.png" />
+</div>
+</div>
+<p>Now we can compare the results with the actual quarterly sales of iPhone for the first 40 quarters (starting from Q2 2007 which the product was first introduced).</p>
+<p><strong>Question 3</strong>: Please add the following columns and their corresponding values to the <code class="docutils literal notranslate"><span class="pre">bass_df</span></code> DataFrame</p>
+<ul class="simple">
+<li><p>Column <code class="docutils literal notranslate"><span class="pre">'Actual'</span></code>: which contains the actual sales from the DataFrame <code class="docutils literal notranslate"><span class="pre">actual_sales</span></code></p></li>
+<li><p>Column <code class="docutils literal notranslate"><span class="pre">'CumulativeActual'</span></code>: which calculates the sum from the first quarter up until each quater in the index</p></li>
+<li><p>Column <code class="docutils literal notranslate"><span class="pre">'PError'</span></code>: which calculates the percentage error of each corresponding quarter from column <code class="docutils literal notranslate"><span class="pre">'Actual'</span></code> and column <code class="docutils literal notranslate"><span class="pre">'st'</span></code> (estimated sales in each quarter), i.e., <code class="docutils literal notranslate"><span class="pre">PError</span> <span class="pre">=</span> <span class="pre">(Actual-st)/Actual</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### start your code here ###</span>
+<span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actual_sales</span><span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">]</span>
+<span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;CumulativeActual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">actual_sales</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">t</span><span class="p">,</span><span class="s1">&#39;Sales&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">actual_sales</span><span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;PError&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">bass_df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span>
+<span class="c1">### end your code here ###</span>
+<span class="n">bass_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ft</th>
+      <th>Ft</th>
+      <th>st</th>
+      <th>St</th>
+      <th>Actual</th>
+      <th>CumulativeActual</th>
+      <th>PError</th>
+    </tr>
+    <tr>
+      <th>Quarter</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.001949</td>
+      <td>0.000000</td>
+      <td>3.672699</td>
+      <td>0.000000</td>
+      <td>0.270</td>
+      <td>0.270</td>
+      <td>-12.602588</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.002187</td>
+      <td>0.002066</td>
+      <td>4.121845</td>
+      <td>3.893112</td>
+      <td>1.119</td>
+      <td>1.389</td>
+      <td>-2.683508</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.002453</td>
+      <td>0.004384</td>
+      <td>4.623538</td>
+      <td>8.261201</td>
+      <td>2.315</td>
+      <td>3.704</td>
+      <td>-0.997209</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.002751</td>
+      <td>0.006983</td>
+      <td>5.183301</td>
+      <td>13.159540</td>
+      <td>1.703</td>
+      <td>5.407</td>
+      <td>-2.043629</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.003082</td>
+      <td>0.009896</td>
+      <td>5.807073</td>
+      <td>18.649135</td>
+      <td>0.717</td>
+      <td>6.124</td>
+      <td>-7.099125</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.003450</td>
+      <td>0.013159</td>
+      <td>6.501194</td>
+      <td>24.797131</td>
+      <td>6.892</td>
+      <td>13.016</td>
+      <td>0.056704</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.003859</td>
+      <td>0.016809</td>
+      <td>7.272376</td>
+      <td>31.677206</td>
+      <td>4.363</td>
+      <td>17.379</td>
+      <td>-0.666829</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.004313</td>
+      <td>0.020892</td>
+      <td>8.127653</td>
+      <td>39.369912</td>
+      <td>3.793</td>
+      <td>21.172</td>
+      <td>-1.142803</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.004815</td>
+      <td>0.025452</td>
+      <td>9.074300</td>
+      <td>47.962967</td>
+      <td>5.208</td>
+      <td>26.380</td>
+      <td>-0.742377</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.005370</td>
+      <td>0.030540</td>
+      <td>10.119730</td>
+      <td>57.551440</td>
+      <td>7.367</td>
+      <td>33.747</td>
+      <td>-0.373657</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.005981</td>
+      <td>0.036210</td>
+      <td>11.271350</td>
+      <td>68.237826</td>
+      <td>8.737</td>
+      <td>42.484</td>
+      <td>-0.290071</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.006652</td>
+      <td>0.042522</td>
+      <td>12.536367</td>
+      <td>80.131944</td>
+      <td>8.752</td>
+      <td>51.236</td>
+      <td>-0.432400</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.007387</td>
+      <td>0.049536</td>
+      <td>13.921550</td>
+      <td>93.350623</td>
+      <td>8.398</td>
+      <td>59.634</td>
+      <td>-0.657722</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.008189</td>
+      <td>0.057319</td>
+      <td>15.432937</td>
+      <td>108.017124</td>
+      <td>14.102</td>
+      <td>73.736</td>
+      <td>-0.094379</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.009061</td>
+      <td>0.065939</td>
+      <td>17.075473</td>
+      <td>124.260231</td>
+      <td>16.235</td>
+      <td>89.971</td>
+      <td>-0.051769</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.010004</td>
+      <td>0.075465</td>
+      <td>18.852590</td>
+      <td>142.212953</td>
+      <td>18.647</td>
+      <td>108.618</td>
+      <td>-0.011025</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.011019</td>
+      <td>0.085971</td>
+      <td>20.765728</td>
+      <td>162.010779</td>
+      <td>20.338</td>
+      <td>128.956</td>
+      <td>-0.021031</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.012106</td>
+      <td>0.097528</td>
+      <td>22.813792</td>
+      <td>183.789418</td>
+      <td>17.073</td>
+      <td>146.029</td>
+      <td>-0.336250</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.013262</td>
+      <td>0.110206</td>
+      <td>24.992575</td>
+      <td>207.681977</td>
+      <td>37.044</td>
+      <td>183.073</td>
+      <td>0.325327</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.014484</td>
+      <td>0.124074</td>
+      <td>27.294161</td>
+      <td>233.815550</td>
+      <td>35.064</td>
+      <td>218.137</td>
+      <td>0.221590</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.015764</td>
+      <td>0.139193</td>
+      <td>29.706331</td>
+      <td>262.307214</td>
+      <td>26.028</td>
+      <td>244.165</td>
+      <td>-0.141322</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.017093</td>
+      <td>0.155618</td>
+      <td>32.212039</td>
+      <td>293.259450</td>
+      <td>26.910</td>
+      <td>271.075</td>
+      <td>-0.197029</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.018461</td>
+      <td>0.173392</td>
+      <td>34.788976</td>
+      <td>326.755096</td>
+      <td>47.789</td>
+      <td>318.864</td>
+      <td>0.272030</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.019851</td>
+      <td>0.192547</td>
+      <td>37.409319</td>
+      <td>362.851933</td>
+      <td>37.430</td>
+      <td>356.294</td>
+      <td>0.000553</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.021247</td>
+      <td>0.213097</td>
+      <td>40.039705</td>
+      <td>401.577141</td>
+      <td>31.241</td>
+      <td>387.535</td>
+      <td>-0.281640</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.022628</td>
+      <td>0.235036</td>
+      <td>42.641499</td>
+      <td>442.921864</td>
+      <td>33.797</td>
+      <td>421.332</td>
+      <td>-0.261695</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0.023970</td>
+      <td>0.258339</td>
+      <td>45.171429</td>
+      <td>486.836225</td>
+      <td>51.025</td>
+      <td>472.357</td>
+      <td>0.114720</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.025250</td>
+      <td>0.282955</td>
+      <td>47.582589</td>
+      <td>533.225157</td>
+      <td>43.719</td>
+      <td>516.076</td>
+      <td>-0.088373</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.026440</td>
+      <td>0.308809</td>
+      <td>49.825855</td>
+      <td>581.945444</td>
+      <td>35.203</td>
+      <td>551.279</td>
+      <td>-0.415387</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0.027515</td>
+      <td>0.335797</td>
+      <td>51.851650</td>
+      <td>632.804359</td>
+      <td>39.272</td>
+      <td>590.551</td>
+      <td>-0.320321</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>0.028449</td>
+      <td>0.363792</td>
+      <td>53.611996</td>
+      <td>685.560219</td>
+      <td>74.468</td>
+      <td>665.019</td>
+      <td>0.280067</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>0.029219</td>
+      <td>0.392641</td>
+      <td>55.062732</td>
+      <td>739.925081</td>
+      <td>61.170</td>
+      <td>726.189</td>
+      <td>0.099841</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>0.029804</td>
+      <td>0.422168</td>
+      <td>56.165740</td>
+      <td>795.569684</td>
+      <td>47.534</td>
+      <td>773.723</td>
+      <td>-0.181591</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>0.030189</td>
+      <td>0.452182</td>
+      <td>56.890996</td>
+      <td>852.130535</td>
+      <td>48.050</td>
+      <td>821.773</td>
+      <td>-0.183996</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>0.030363</td>
+      <td>0.482476</td>
+      <td>57.218267</td>
+      <td>909.218892</td>
+      <td>74.780</td>
+      <td>896.553</td>
+      <td>0.234845</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>0.030320</td>
+      <td>0.512836</td>
+      <td>57.138295</td>
+      <td>966.431192</td>
+      <td>51.200</td>
+      <td>947.753</td>
+      <td>-0.115982</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>0.030063</td>
+      <td>0.543045</td>
+      <td>56.653351</td>
+      <td>1023.360364</td>
+      <td>40.399</td>
+      <td>988.152</td>
+      <td>-0.402345</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>0.029598</td>
+      <td>0.572893</td>
+      <td>55.777094</td>
+      <td>1079.607339</td>
+      <td>45.513</td>
+      <td>1033.665</td>
+      <td>-0.225520</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>0.028938</td>
+      <td>0.602176</td>
+      <td>54.533767</td>
+      <td>1134.792093</td>
+      <td>78.290</td>
+      <td>1111.955</td>
+      <td>0.303439</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>0.028101</td>
+      <td>0.630710</td>
+      <td>52.956791</td>
+      <td>1188.563574</td>
+      <td>50.763</td>
+      <td>1162.718</td>
+      <td>-0.043216</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can also generate the date of the last day of each quarter using the code below. This list will be later used as new indexes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quarter_index_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;4/1/2007&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;Q&#39;</span><span class="p">)</span>
+<span class="n">quarter_index_date</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2007-06-30&#39;, &#39;2007-09-30&#39;, &#39;2007-12-31&#39;, &#39;2008-03-31&#39;,
+               &#39;2008-06-30&#39;, &#39;2008-09-30&#39;, &#39;2008-12-31&#39;, &#39;2009-03-31&#39;,
+               &#39;2009-06-30&#39;, &#39;2009-09-30&#39;, &#39;2009-12-31&#39;, &#39;2010-03-31&#39;,
+               &#39;2010-06-30&#39;, &#39;2010-09-30&#39;, &#39;2010-12-31&#39;, &#39;2011-03-31&#39;,
+               &#39;2011-06-30&#39;, &#39;2011-09-30&#39;, &#39;2011-12-31&#39;, &#39;2012-03-31&#39;,
+               &#39;2012-06-30&#39;, &#39;2012-09-30&#39;, &#39;2012-12-31&#39;, &#39;2013-03-31&#39;,
+               &#39;2013-06-30&#39;, &#39;2013-09-30&#39;, &#39;2013-12-31&#39;, &#39;2014-03-31&#39;,
+               &#39;2014-06-30&#39;, &#39;2014-09-30&#39;, &#39;2014-12-31&#39;, &#39;2015-03-31&#39;,
+               &#39;2015-06-30&#39;, &#39;2015-09-30&#39;, &#39;2015-12-31&#39;, &#39;2016-03-31&#39;,
+               &#39;2016-06-30&#39;, &#39;2016-09-30&#39;, &#39;2016-12-31&#39;, &#39;2017-03-31&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;Q-DEC&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question 4</strong>: Please (i) replace the original indexes using the newly created list <code class="docutils literal notranslate"><span class="pre">quarter_index_date</span></code> and (ii) then create the following plots from the DataFrame <code class="docutils literal notranslate"><span class="pre">bass_df</span></code> using the size <code class="docutils literal notranslate"><span class="pre">figsize=(12,4)</span></code>:</p>
+<ul class="simple">
+<li><p>Columns <code class="docutils literal notranslate"><span class="pre">['St','CumulativeActual']</span></code> using a line plot</p></li>
+<li><p>Columns <code class="docutils literal notranslate"><span class="pre">['st','Actual']</span></code> using a line plot</p></li>
+<li><p>Column <code class="docutils literal notranslate"><span class="pre">['PError']</span></code> using a bar plot</p></li>
+</ul>
+<p><strong>Hint</strong>: you can use the method <code class="docutils literal notranslate"><span class="pre">.set_index(...)</span></code> by calling <code class="docutils literal notranslate"><span class="pre">bass_df</span> <span class="pre">=</span>&#160; <span class="pre">bass_df.set_index(new_index_list)</span></code> to set the index (see <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.set_index.html">link</a>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### start your code here ###</span>
+<span class="n">bass_df</span> <span class="o">=</span> <span class="n">bass_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">quarter_index_date</span><span class="p">)</span>
+<span class="n">bass_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Quarter&#39;</span><span class="p">]</span>
+<span class="n">bass_df</span><span class="p">[[</span><span class="s1">&#39;St&#39;</span><span class="p">,</span><span class="s1">&#39;CumulativeActual&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">bass_df</span><span class="p">[[</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;Actual&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">bass_df</span><span class="p">[[</span><span class="s1">&#39;PError&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="c1">### end your code here ###</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Quarter&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/97b18dee6e0bd4b4d0192d9422deb24c3b2de1618854f92470b8131511e03442.png" src="../_images/97b18dee6e0bd4b4d0192d9422deb24c3b2de1618854f92470b8131511e03442.png" />
+<img alt="../_images/0f64380aec495dc1fdaf2b45c1e66b583f03d137402c87cb42af343e1dba62fe.png" src="../_images/0f64380aec495dc1fdaf2b45c1e66b583f03d137402c87cb42af343e1dba62fe.png" />
+<img alt="../_images/0feb4d7eebb43d47e86d07685ae6dd90aa18c6349d95b0aac711ac291f5c93c4.png" src="../_images/0feb4d7eebb43d47e86d07685ae6dd90aa18c6349d95b0aac711ac291f5c93c4.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ex_Lecture_Demo_Inventory_Sim.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">(R, s, S) Inventory Simulation</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-for-bass-parameters-estimation">Regression for Bass parameters estimation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yossiri Adulyasak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

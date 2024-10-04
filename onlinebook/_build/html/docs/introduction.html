@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction &#8212; Supply Chain Analytics - Case Studies and Demos with Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/introduction';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Case: Retail analytics - Rue La La" href="Case1_retails_intro.html" />
+    <link rel="prev" title="Applications of Supply Chain Analytics with Python" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/sc_analytics_logo_small.png" class="logo__image only-light" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>
+    <script>document.write(`<img src="../_static/sc_analytics_logo_small.png" class="logo__image only-dark" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Case studies and Demos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case1_retails_intro.html">Case: Retail analytics - Rue La La</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case1_1_Simple_Retail_Demand_Model.html">Demo: Simplified retail prediction pipeline for a single item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_2_Module1A_Retail_Demand_Model.html">Module 1A: Retail predictive model pipeline for multiple items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_3_Module1B_Retail_Demand_Predict.html">Module 1B: Predicting demands from trained models for decision models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_4_Module2A_Retail_Price_Optimization.html">Module 2A: Retail price optimization - Simple Explicit Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_5_Module2B_Retail_Price_Optimization_Script.html">Module 2B: Retail price optimization - Automated Implicit Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case2_online_fulfillment.html">Case: Online fulfillment - US online retail</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case2_1_Module1_Online_Fulfillment_Script.html">Demo: Online Fulfillment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case3_disruption_analytics.html">Case: Disruption Analytics - Ford Motor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case3_1_Disruption_Risk_Analytics.html">Demo: Supply Chain Distruption Risk Analytics</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Examples of Analytics Techniques in Supply Chains</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex_Lecture_Demo_Inventory_Sim.html">(R, s, S) Inventory Simulation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Ex_Bass_diffusion_full_demo.html">Bass Diffusion - full demo</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab-for-python-code">Google Colab for Python Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-local-installation">Python Local Installation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
+<p>This online book with code is designed to provide you with a comprehensive exploration of real-world applications and practical insights into the field of supply chain analytics.</p>
+<p>Supply chain analytics has emerged as a critical discipline for businesses seeking to optimize their operations, reduce costs, and improve customer satisfaction. By leveraging data-driven insights, organizations can make informed decisions, identify inefficiencies, and gain a competitive edge.</p>
+<p>Throughout this book, you will encounter a diverse collection of case studies from various industries, including manufacturing, retail, healthcare, and logistics. Each case study will delve into specific challenges faced by companies, the analytical approaches they employed, and the tangible results achieved.</p>
+<p>By examining these real-world examples, you will gain a deeper understanding of how supply chain analytics can be applied to address a wide range of business problems. You will learn about the tools, techniques, and best practices that have proven successful in improving supply chain performance.</p>
+<p>Whether you are a seasoned supply chain professional or a newcomer to the field, this book offers valuable insights and practical guidance. It is our hope that these case studies will inspire you to explore the possibilities of supply chain analytics and apply them to your own organization.</p>
+<section id="prerequisite">
+<h2>Prerequisite:<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
+<p>Prerequisites:</p>
+<p>To fully grasp the concepts and techniques presented in this book, a foundational understanding of the following areas is essential:</p>
+<ul class="simple">
+<li><p><strong>Basic Python Programming for Data Analytics:</strong> Proficiency in Python programming is crucial for implementing the analytical models and techniques discussed. A solid grasp of fundamental Python concepts, data structures, and libraries will be invaluable. If the reader does not have a supporting meterial for this, we refer the reader to our mini-book “Introduction to Data Analytics with Python for Supply Chains” by Yossiri Adulyasak and Martin Cousineau and the Python tutorial available on <a class="reference external" href="https://www.kaggle.com/learn">Kaggle</a>
+author: Yossiri Adulyasak and Martin Cousineau</p></li>
+<li><p><strong>Machine Learning Models:</strong> Familiarity with machine learning algorithms is necessary for understanding and applying predictive analytics in supply chain contexts. Knowledge of regression analysis, classification, clustering, and time series forecasting will be beneficial.</p></li>
+<li><p><strong>Optimization Models:</strong> A foundation in optimization models is required to explore techniques for optimizing supply chain decisions. Understanding linear programming, integer programming, and other optimization methodologies will be helpful.</p></li>
+</ul>
+<p>If you have a solid background in these areas, you are well-equipped to follow this online book of supply chain analytics case studies. Throughout the book, we will delve into specific challenges faced by companies, the analytical approaches they employed, and the Python code that demonstrates how the analytics tools can be implemented. By examining these real-world examples, you will gain a deeper understanding of how supply chain analytics can be applied to address a wide range of business problems.</p>
+<p>Whether you are a seasoned supply chain professional or a newcomer to the field, this book offers valuable insights and practical guidance. It is our hope that these case studies will inspire you to explore the possibilities of supply chain analytics and apply them to your own organization.</p>
+<section id="google-colab-for-python-code">
+<h3>Google Colab for Python Code<a class="headerlink" href="#google-colab-for-python-code" title="Permalink to this heading">#</a></h3>
+<p>This course leverages Google Colab, a cloud-based platform for interactive computing, to facilitate your exploration of supply chain analytics concepts through code examples and demonstrations. Colab offers a user experience very similar to Jupyter Notebook (Anaconda), but with the added benefit of being free and readily accessible from any web browser. Each part of the online book includes a link that brings you direcrly to the code available in Google Colab.</p>
+<p>A Google account is necessary to utilize Colab. You can conveniently use your Google email address to register for a free account if you haven’t already.</p>
+<p>Accessing Colab:</p>
+<p>Visit the Colab Website: Navigate to <a class="reference external" href="https://colab.research.google.com">https://colab.research.google.com</a> using a preferred web browser. While most browsers are compatible, utilizing Google Chrome is recommended to ensure optimal performance and avoid potential technical issues.
+Sign Up with Google Account: To begin using Colab, sign in using your Google account credentials.
+Learning More about Colab:</p>
+<p><strong>Short Introduction:</strong> Gain a quick overview of Colab’s functionalities through this YouTube video: <a class="reference external" href="https://www.youtube.com/watch?v=inN8seMm7UI">https://www.youtube.com/watch?v=inN8seMm7UI</a>
+<strong>Detailed Guide:</strong> For a more comprehensive understanding of Colab, explore the official Colab notebook introduction: <a class="reference external" href="https://colab.research.google.com/notebooks/intro.ipynb">https://colab.research.google.com/notebooks/intro.ipynb</a>
+By utilizing Colab, you will be able to actively participate in coding exercises and demonstrations, solidifying your grasp of supply chain analytics concepts within a practical and interactive environment.</p>
+</section>
+<section id="python-local-installation">
+<h3>Python Local Installation<a class="headerlink" href="#python-local-installation" title="Permalink to this heading">#</a></h3>
+<p>Instead of Google Colab, it is also possible to use Python locally on your machine by using Anaconda 3. Please refer to the mini-book “Introduction to Data Analytics with Python for Supply Chains” by Yossiri Adulyasak and Martin Cousineau or the instruction below. Anaconda is a powerful Python distribution that comes with a large collection of packages and tools that are essential for data science, machine learning, and scientific computing. Here’s a brief guide on how to install Anaconda 3:</p>
+<p><strong>1. Download the Anaconda Installer:</strong></p>
+<ul class="simple">
+<li><p>Visit the official Anaconda download page: <a class="reference external" href="https://www.anaconda.com/download">https://www.anaconda.com/download</a></p></li>
+<li><p>Select the appropriate installer for your operating system (Windows, macOS, or Linux).</p></li>
+</ul>
+<p><strong>2. Run the Installer:</strong></p>
+<ul class="simple">
+<li><p>Double-click the downloaded installer file.</p></li>
+<li><p>Follow the on-screen instructions.</p></li>
+<li><p>Make sure to choose the “Add Anaconda to your PATH” option during installation. This will allow you to access Anaconda commands from your terminal or command prompt.</p></li>
+</ul>
+<p><strong>3. Verify Installation:</strong></p>
+<ul class="simple">
+<li><p>Open your terminal or command prompt.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">--version</span></code> and press Enter.</p></li>
+<li><p>If Anaconda is installed correctly, you should see the installed version number.</p></li>
+</ul>
+<p><strong>Additional Notes:</strong></p>
+<ul class="simple">
+<li><p>Anaconda creates a separate environment for Python and its packages, which helps in managing different projects and avoiding conflicts between libraries.</p></li>
+<li><p>You can use the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command to create, activate, and deactivate different environments.</p></li>
+<li><p>For more information and advanced usage, refer to the Anaconda documentation: <a class="reference external" href="https://docs.anaconda.com/">https://docs.anaconda.com/</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Applications of Supply Chain Analytics with Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Case1_retails_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Case: Retail analytics - Rue La La</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab-for-python-code">Google Colab for Python Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-local-installation">Python Local Installation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yossiri Adulyasak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

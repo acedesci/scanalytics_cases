@@ -1,0 +1,1302 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Demo: Supply Chain Distruption Risk Analytics &#8212; Supply Chain Analytics - Case Studies and Demos with Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Case3_1_Disruption_Risk_Analytics';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="(R, s, S) Inventory Simulation" href="Ex_Lecture_Demo_Inventory_Sim.html" />
+    <link rel="prev" title="Case: Disruption Analytics - Ford Motor" href="Case3_disruption_analytics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/sc_analytics_logo_small.png" class="logo__image only-light" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>
+    <script>document.write(`<img src="../_static/sc_analytics_logo_small.png" class="logo__image only-dark" alt="Supply Chain Analytics - Case Studies and Demos with Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Case studies and Demos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case1_retails_intro.html">Case: Retail analytics - Rue La La</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case1_1_Simple_Retail_Demand_Model.html">Demo: Simplified retail prediction pipeline for a single item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_2_Module1A_Retail_Demand_Model.html">Module 1A: Retail predictive model pipeline for multiple items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_3_Module1B_Retail_Demand_Predict.html">Module 1B: Predicting demands from trained models for decision models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_4_Module2A_Retail_Price_Optimization.html">Module 2A: Retail price optimization - Simple Explicit Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case1_5_Module2B_Retail_Price_Optimization_Script.html">Module 2B: Retail price optimization - Automated Implicit Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Case2_online_fulfillment.html">Case: Online fulfillment - US online retail</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Case2_1_Module1_Online_Fulfillment_Script.html">Demo: Online Fulfillment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Case3_disruption_analytics.html">Case: Disruption Analytics - Ford Motor</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Demo: Supply Chain Distruption Risk Analytics</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Examples of Analytics Techniques in Supply Chains</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex_Lecture_Demo_Inventory_Sim.html">(R, s, S) Inventory Simulation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Ex_Bass_diffusion_full_demo.html">Bass Diffusion - full demo</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Case3_1_Disruption_Risk_Analytics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Demo: Supply Chain Distruption Risk Analytics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocks-1-2-data-inputs-and-parameters">Blocks 1&amp;2: Data inputs and parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocks-3-4-optimization-model-results">Blocks 3 &amp; 4: Optimization model &amp; results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3a-ttr-model">Block 3A: <strong>TTR Model:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-solution-and-results">Block 4: Solution and results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3b-tts-model">Block 3B: <strong>TTS Model:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Block 4: Solution and results</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="demo-supply-chain-distruption-risk-analytics">
+<h1>Demo: Supply Chain Distruption Risk Analytics<a class="headerlink" href="#demo-supply-chain-distruption-risk-analytics" title="Permalink to this heading">#</a></h1>
+<p>We start our prescriptive modeling by installing the (i) Pyomo package and (ii) the linear programming solver GLPK (GNU Linear Programming Kit). Please feel free to revisit <a class="reference external" href="https://colab.research.google.com/github/acedesci/scanalytics/blob/master/EN/S08_09_Retail_Analytics/S9_Module2A_Retail_Price_Optimization.ipynb">Online Fulfillment Demo</a> for further information.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Pyomo and GLPK in your Python environment if it is not already done.</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">pyomo</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">glpk</span>
+</pre></div>
+</div>
+<section id="blocks-1-2-data-inputs-and-parameters">
+<h2>Blocks 1&amp;2: Data inputs and parameters<a class="headerlink" href="#blocks-1-2-data-inputs-and-parameters" title="Permalink to this heading">#</a></h2>
+<p>We have two different datasets. The latter has more complex configurations, but their structures are similar.</p>
+<ul class="simple">
+<li><p>In problem 1, the instance consists of 3 suppliers, 2 products (vehicles) and 4 scenarios. There is only one supply chain configuration;</p></li>
+<li><p>In problem 2, the instance consists of 5 suppliers, 8 products (vehicles) and 21 scenarios. There are three supply chain configurations (A, B and C) and the analysis for each configuration must be done separately (in different runs).</p></li>
+</ul>
+<p>We would recommend that you review problem 1 to see the structure of the model prior to trying the problem 2.</p>
+<p>** Details of data inputs &amp; parameters **
+The DataFrame <strong>inputScenarios</strong> contains the values of active link <span class="math notranslate nohighlight">\(\alpha_{ij}^n\)</span> from supply node <span class="math notranslate nohighlight">\(i\)</span> for product/vehicle <span class="math notranslate nohighlight">\(j\)</span> each scenario <span class="math notranslate nohighlight">\(n\)</span>. <span class="math notranslate nohighlight">\(\alpha_{ij}^n = 1\)</span> indicates that that link is active in this scenario whereas <span class="math notranslate nohighlight">\(\alpha_{ij}^n=0\)</span> indicates that the link is inactive (disrupted/not used) in that scenario.</p>
+<p>Meanwhile, the DataFrame <strong>inputParameters</strong> contains a set of parameters as follows:
+() contains the capacity of each supplier (in <strong>supplierList</strong>), demand for</p>
+<ul class="simple">
+<li><p>Column <em>Type</em> indicates if the parameter is for the supply node (Supplier) or product node (Product)</p></li>
+<li><p>Column <em>Parameter</em> indicates what parameter is given in that row. The parameters include</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Capacity of supply node <span class="math notranslate nohighlight">\(i\)</span>: <span class="math notranslate nohighlight">\(c_i\)</span></p></li>
+<li><p>Demand of product node <span class="math notranslate nohighlight">\(j\)</span>: <span class="math notranslate nohighlight">\(d_j\)</span></p></li>
+<li><p>Initial inventory of product <span class="math notranslate nohighlight">\(j\)</span>: <span class="math notranslate nohighlight">\(s_j\)</span></p></li>
+<li><p>Unit profit (profit margin) of product <span class="math notranslate nohighlight">\(j\)</span>: <span class="math notranslate nohighlight">\(f_j\)</span></p></li>
+<li><p>Time-to-recover (TTR) of each scenario <span class="math notranslate nohighlight">\(n\)</span>: <span class="math notranslate nohighlight">\(t^n\)</span></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Column <em>Index</em> indicates the index associated with that parameter</p></li>
+<li><p>Column <em>Value</em> indicates the value of that parameter</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pyomo.environ</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span> <span class="c1"># this one can be used to display dataframes in case you want to print out multiple of them</span>
+
+<span class="c1"># Problem 1 (small scale, one configuration)</span>
+<span class="n">urlParameters</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S11_Disruption_Management/inputParameters_Prob1.csv&#39;</span>
+<span class="n">urlScenario</span>  <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S11_Disruption_Management/inputScenarios_Prob1.csv&#39;</span>
+
+<span class="c1"># Problem 2 (large scale, 3 possible SC configurations - A, B and C)</span>
+<span class="c1"># urlParameters = &#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S11_Disruption_Management/inputParameters_Prob2.csv&#39;</span>
+
+<span class="c1"># Here are the scenarios under each configuration. The analysis could be done for one SC configuration at a time so only choose one url among them.</span>
+<span class="c1"># urlScenario  = &#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S11_Disruption_Management/inputScenarios_Prob2_Config_A.csv&#39;</span>
+<span class="c1"># urlScenario  = &#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S11_Disruption_Management/inputScenarios_Prob2_Config_B.csv&#39;</span>
+<span class="c1"># urlScenario  = &#39;https://raw.githubusercontent.com/acedesci/scanalytics/master/EN/S11_Disruption_Management/inputScenarios_Prob2_Config_C.csv&#39;</span>
+
+<span class="c1"># read CSV files</span>
+<span class="n">inputScenarios</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">urlScenario</span><span class="p">)</span>
+<span class="n">inputParameters</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">urlParameters</span><span class="p">)</span>
+
+<span class="c1"># Just in case you want to see the loaded DataFrames, you can display or print them</span>
+<span class="c1"># (display gives a more beautiful output for DataFrame)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">inputScenarios</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">inputParameters</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Node</th>
+      <th>Product</th>
+      <th>Scenario_0</th>
+      <th>Scenario_1</th>
+      <th>Scenario_2</th>
+      <th>Scenario_3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>S1</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>S1</td>
+      <td>P2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>S2</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>S2</td>
+      <td>P2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>S3</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>S3</td>
+      <td>P2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Type</th>
+      <th>Parameter</th>
+      <th>Index</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Supplier</td>
+      <td>Capacity</td>
+      <td>S1</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Supplier</td>
+      <td>Capacity</td>
+      <td>S2</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Supplier</td>
+      <td>Capacity</td>
+      <td>S3</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Product</td>
+      <td>Demand</td>
+      <td>P1</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Product</td>
+      <td>Demand</td>
+      <td>P2</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Product</td>
+      <td>Inventory</td>
+      <td>P1</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Product</td>
+      <td>Inventory</td>
+      <td>P2</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Product</td>
+      <td>Loss</td>
+      <td>P1</td>
+      <td>5000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Product</td>
+      <td>Loss</td>
+      <td>P2</td>
+      <td>6500</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Disruption</td>
+      <td>TTR</td>
+      <td>Scenario_0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Disruption</td>
+      <td>TTR</td>
+      <td>Scenario_1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Disruption</td>
+      <td>TTR</td>
+      <td>Scenario_2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Disruption</td>
+      <td>TTR</td>
+      <td>Scenario_3</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We then create the inputs used in the Pyomo model from the DataFrames above.</p>
+<p><strong>Lists</strong>:</p>
+<ul class="simple">
+<li><p><strong>productList</strong> contains the list of products (vehicles), or set <span class="math notranslate nohighlight">\(\mathcal{V}\)</span></p></li>
+<li><p><strong>supplierList</strong> contains the list of supply nodes (plants), or set <span class="math notranslate nohighlight">\(\mathcal{A}\)</span></p></li>
+<li><p><strong>scenarioList</strong> contains the list of scenarios</p></li>
+</ul>
+<p><strong>Dictionaries of data</strong>:</p>
+<ul class="simple">
+<li><p><strong>supplierCapacityDict[i]</strong> contains the values of <span class="math notranslate nohighlight">\(c_i\)</span>;</p></li>
+<li><p><strong>productDemandDict[j]</strong> contains the values of <span class="math notranslate nohighlight">\(d_j\)</span>;</p></li>
+<li><p><strong>productInvDict[j]</strong> contains the values of <span class="math notranslate nohighlight">\(s_j\)</span>;</p></li>
+<li><p><strong>productLossDict[j]</strong> contains the values of <span class="math notranslate nohighlight">\(f_j\)</span>;</p></li>
+<li><p><strong>scenarioTTRDict[n]</strong> contains the values of <span class="math notranslate nohighlight">\(t^n\)</span>;</p></li>
+<li><p><strong>scenarioActiveNodeDict[n][(i,j)]</strong> contains the values of <span class="math notranslate nohighlight">\(\alpha^n_{ij}\)</span> whether the link <span class="math notranslate nohighlight">\((i,j)\)</span> is active in scenario <span class="math notranslate nohighlight">\(n\)</span> for not.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">productList</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Product&#39;</span><span class="p">][</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">supplierList</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Supplier&#39;</span><span class="p">][</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">scenarioList</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Disruption&#39;</span><span class="p">][</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="n">supplierCapacityDict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">supplierList</span><span class="p">:</span>
+  <span class="n">cap</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Parameter&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Capacity&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">)][</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">supplierCapacityDict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cap</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Print SupplierCapacityDict&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">supplierCapacityDict</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39; : &#39;</span><span class="p">,</span> <span class="n">supplierCapacityDict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="c1">#print(&#39;\n&#39;)</span>
+
+<span class="n">productDemandDict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">productInvDict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">productLossDict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+  <span class="n">dem</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Parameter&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Demand&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">j</span><span class="p">)][</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">inv</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Parameter&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Inventory&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">j</span><span class="p">)][</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">loss</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Parameter&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">j</span><span class="p">)][</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">productDemandDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dem</span>
+  <span class="n">productInvDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">inv</span>
+  <span class="n">productLossDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Print productDemandDict&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">productDemandDict</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39; : &#39;</span><span class="p">,</span> <span class="n">productDemandDict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="c1">#print(&#39;\n&#39;)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Print productInvDict&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">productInvDict</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39; : &#39;</span><span class="p">,</span> <span class="n">productInvDict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="c1">#print(&#39;\n&#39;)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Print productLossDict&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">productLossDict</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39; : &#39;</span><span class="p">,</span> <span class="n">productLossDict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="c1">#print(&#39;\n&#39;)</span>
+
+<span class="n">scenarioTTRDict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">scenarioActiveNodeDict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">scenarioList</span><span class="p">:</span>
+  <span class="n">ttr</span> <span class="o">=</span> <span class="n">inputParameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Parameter&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;TTR&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">inputParameters</span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">n</span><span class="p">)][</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">scenarioTTRDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ttr</span>
+  <span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">nActiveLinks</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">inputScenarios</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: N. active links = &quot;</span><span class="p">,</span> <span class="n">nActiveLinks</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inputScenarios</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
+    <span class="n">supp</span> <span class="o">=</span> <span class="n">inputScenarios</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ind</span><span class="p">][</span><span class="s1">&#39;Node&#39;</span><span class="p">]</span>
+    <span class="n">prod</span> <span class="o">=</span> <span class="n">inputScenarios</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ind</span><span class="p">][</span><span class="s1">&#39;Product&#39;</span><span class="p">]</span>
+    <span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">supp</span><span class="p">,</span><span class="n">prod</span><span class="p">)]</span> <span class="o">=</span> <span class="n">inputScenarios</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Print SupplierCapacityDict
+S1  :  30
+S2  :  45
+S3  :  60
+Print productDemandDict
+P1  :  75
+P2  :  50
+Print productInvDict
+P1  :  20
+P2  :  25
+Print productLossDict
+P1  :  5000
+P2  :  6500
+Scenario_0: N. active links =  6
+Scenario_1: N. active links =  4
+Scenario_2: N. active links =  4
+Scenario_3: N. active links =  4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="blocks-3-4-optimization-model-results">
+<h2>Blocks 3 &amp; 4: Optimization model &amp; results<a class="headerlink" href="#blocks-3-4-optimization-model-results" title="Permalink to this heading">#</a></h2>
+<p>Since the risk exposure analytics framework requires solving one linear programming (LP) for each scenario at a time, we make use of the <em>for</em> loop to perform the procedure which create an LP which is loaded with the parameters for each scenario <span class="math notranslate nohighlight">\(n\)</span> and solve the model iteratively to obtain the optimal solution corresponding to that scenario.  There are two optimizatiom models, i.e., TTR and TTS models.</p>
+<hr class="docutils" />
+<section id="block-3a-ttr-model">
+<h3>Block 3A: <strong>TTR Model:</strong><a class="headerlink" href="#block-3a-ttr-model" title="Permalink to this heading">#</a></h3>
+<p>The first model is the best-response model based on the TTR. The components of the models are as follows. Note that these variables are created for each scenario but the scenario index <span class="math notranslate nohighlight">\(n\)</span> is dropped:</p>
+<p>(i) <strong>Decision variables:</strong> consists of the following variables:</p>
+<ul class="simple">
+<li><p>model.<strong>l</strong><span class="math notranslate nohighlight">\([j]\)</span> (or <span class="math notranslate nohighlight">\(l_{j}\)</span>): the number of unit loss of product <em>j</em> at supplier <em>i</em>;</p></li>
+<li><p>model.<strong>y</strong><span class="math notranslate nohighlight">\([i, j]\)</span> (or <span class="math notranslate nohighlight">\(y_{ij}\)</span>) the amount of product <em>j</em> produced at supplier <em>i</em>;</p></li>
+</ul>
+<p>(ii) <strong>Objective function:</strong> In the TTR model, we want to minimize the total profit loss due to disruption in each scenario, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[\min_{y,l} \sum_{j\in \mathcal{V}} f_j \cdot l_j\]</div>
+<p>(iii) <strong>Constraints:</strong></p>
+<p><strong>Constraint set 1:</strong>  demand loss for product <span class="math notranslate nohighlight">\(j\)</span> **</p>
+<p>This set of constraints helps determine the lower bound on the demand lost (<span class="math notranslate nohighlight">\(l_j\)</span>) during the disruption time (<span class="math notranslate nohighlight">\(t^{n}\)</span>) given the current inventory level (<span class="math notranslate nohighlight">\(s_j\)</span>) and the production amount for product <span class="math notranslate nohighlight">\(j\)</span> from supplier <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(y_{ij}\)</span>) from the active link <span class="math notranslate nohighlight">\(\alpha^{n}_{ij}=1\)</span>.
+$<span class="math notranslate nohighlight">\(\sum_{i\in\mathcal{A}} \left( \alpha^{n}_{ij} \cdot y_{ij} \right) + l_j \geq d_j \cdot t^{n} - s_j,\quad \forall j\in \mathcal{V} \)</span>$</p>
+<p><strong>Constraint set 2:</strong>  capacity at each supplier <span class="math notranslate nohighlight">\(i\)</span></p>
+<p>This set of constraints ensures that the cumulative production output of supplier <span class="math notranslate nohighlight">\(i\)</span> is within the capacity of that supplier if it is still active <span class="math notranslate nohighlight">\(\left(\alpha^{n}_{ij}=1\right)\)</span>. Note that we need to check if at least one link <span class="math notranslate nohighlight">\(\alpha^{n}_{ij}\)</span> for supplier <span class="math notranslate nohighlight">\(i\)</span> is active for that scenario, otherwise Pyomo will return an error. In the case when there is no active link, we will omit that supplier in the model (since that supplier will not be used anyway). This is done in the codes when we use the boolean <em>noSupply</em>.</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j\in\mathcal{V}} \alpha^{n}_{ij} \cdot y_{ij}  \leq c_i \cdot t^{(n)},\quad \forall i\in \mathcal{A} \]</div>
+</section>
+<section id="block-4-solution-and-results">
+<h3>Block 4: Solution and results<a class="headerlink" href="#block-4-solution-and-results" title="Permalink to this heading">#</a></h3>
+<p>To aggregate the results from each scenario, we calculate and store the results in the <strong>scenarioResults</strong> DataFrame which stores the following results based on the optimal solution <span class="math notranslate nohighlight">\(\left( \mathbf{l}^{n,*}, \mathbf{y}^{n,*} \right)\)</span> for each scenario <span class="math notranslate nohighlight">\(n\)</span> : ‘disruptionCost’ <span class="math notranslate nohighlight">\(\left( \sum_j f_j \cdot l_j^{n,*} \right)\)</span>, ‘riskExposureIndex’ <span class="math notranslate nohighlight">\(\left( \frac{C^n}{C^{\max}} \right)\)</span>, ‘lostUnits’ <span class="math notranslate nohighlight">\(\left( \sum_j l_j^{n,*} \right)\)</span>, ‘totalProduction’ <span class="math notranslate nohighlight">\(\left( \sum_i \sum_j y_{ij}^{n,*} \right)\)</span>, ‘activeLinks’ (how many links are active under a given scenario)$, and ‘utilizedLinks’ (how many links are used in the solution of a given scenario).</p>
+<p>Finally, we display the descriptive statistics of the results over all disruption scenarios. Here we make use of function <em>discribe()</em> in pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html">(Link)</a> and <em>hist()</em> in matplotlib <a class="reference external" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.hist.html">(Link)</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TTR Model</span>
+
+<span class="n">disruptionCost</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">disruptionResponse</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">disruptionDemandLoss</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">resultcolumns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;disruptionCost&#39;</span><span class="p">,</span> <span class="s1">&#39;riskExposureIndex&#39;</span><span class="p">,</span> <span class="s1">&#39;lostUnits&#39;</span><span class="p">,</span> <span class="s1">&#39;totalProduction&#39;</span><span class="p">,</span> <span class="s1">&#39;activeLinks&#39;</span><span class="p">,</span><span class="s1">&#39;utilizedLinks&#39;</span><span class="p">]</span>
+<span class="n">TTRscenarioResults</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">resultcolumns</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">scenarioList</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">scenarioList</span><span class="p">:</span>
+  <span class="c1"># print(&quot;Analyzing:&quot;+str(n))</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">ConcreteModel</span><span class="p">()</span>
+
+  <span class="c1"># Variables</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">productList</span><span class="p">,</span> <span class="n">within</span> <span class="o">=</span> <span class="n">NonNegativeReals</span><span class="p">)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">supplierList</span><span class="p">,</span> <span class="n">productList</span><span class="p">,</span> <span class="n">within</span> <span class="o">=</span> <span class="n">NonNegativeReals</span><span class="p">)</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">demandLoss</span> <span class="o">=</span> <span class="n">ConstraintList</span><span class="p">()</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">supplierCapacity</span> <span class="o">=</span> <span class="n">ConstraintList</span><span class="p">()</span>
+
+  <span class="c1"># Objective function</span>
+  <span class="n">obj_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">productLossDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">)</span>
+  <span class="c1"># print(obj_expr)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">OBJ</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">obj_expr</span><span class="p">,</span> <span class="n">sense</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">)</span>
+
+  <span class="c1"># Constraints 1 calculate demand loss for each product</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+    <span class="n">const_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">supplierList</span><span class="p">)</span> <span class="o">+</span> \
+                  <span class="n">model</span><span class="o">.</span><span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">productDemandDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">scenarioTTRDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">productInvDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="c1"># print(const_expr)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">demandLoss</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">const_expr</span><span class="p">)</span>
+
+  <span class="c1"># Constraints 2 capacity at each supplier i</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">supplierList</span><span class="p">:</span>
+    <span class="c1"># check if there is any left hand side (i.e., if there is at least one available active link), otherwise pyomo will return an error</span>
+    <span class="n">noSupply</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">noSupply</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">break</span>
+
+    <span class="c1"># we generate the constraint only if noSupply = False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">noSupply</span><span class="p">:</span>
+      <span class="n">const_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">supplierCapacityDict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">scenarioTTRDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+      <span class="c1">#print(const_expr)</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">supplierCapacity</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">const_expr</span><span class="p">)</span>
+
+  <span class="c1"># Solve the model</span>
+  <span class="n">opt</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;glpk&#39;</span><span class="p">)</span>
+  <span class="n">opt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+  <span class="c1"># Save the result for each scenario</span>
+
+  <span class="n">disruptionCost</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">OBJ</span><span class="p">()</span>
+  <span class="n">TTRscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;disruptionCost&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">disruptionCost</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+  <span class="n">disruptionResponse</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">nUtilizedLinks</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inputScenarios</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="n">inputScenarios</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ind</span><span class="p">][</span><span class="s1">&#39;Node&#39;</span><span class="p">]</span>
+      <span class="n">j</span> <span class="o">=</span> <span class="n">inputScenarios</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ind</span><span class="p">][</span><span class="s1">&#39;Product&#39;</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">disruptionResponse</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+          <span class="n">nUtilizedLinks</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">disruptionResponse</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+
+  <span class="n">TTRscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;totalProduction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">disruptionResponse</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+  <span class="n">TTRscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;activeLinks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+  <span class="n">TTRscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;utilizedLinks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nUtilizedLinks</span>
+
+  <span class="n">disruptionDemandLoss</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+    <span class="n">disruptionDemandLoss</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+  <span class="n">TTRscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;lostUnits&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">disruptionDemandLoss</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="n">TTRscenarioResults</span><span class="p">[</span><span class="s1">&#39;disruptionCost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">:</span>
+  <span class="n">TTRscenarioResults</span><span class="p">[</span><span class="s1">&#39;riskExposureIndex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TTRscenarioResults</span><span class="p">[</span><span class="s1">&#39;disruptionCost&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">TTRscenarioResults</span><span class="p">[</span><span class="s1">&#39;disruptionCost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span> <span class="n">TTRscenarioResults</span><span class="p">[</span><span class="s1">&#39;riskExposureIndex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># Show the results</span>
+<span class="n">pandas</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">display</span><span class="p">(</span><span class="n">TTRscenarioResults</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>disruptionCost</th>
+      <th>riskExposureIndex</th>
+      <th>lostUnits</th>
+      <th>totalProduction</th>
+      <th>activeLinks</th>
+      <th>utilizedLinks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Scenario_0</th>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>205.000</td>
+      <td>6</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>Scenario_1</th>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>205.000</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Scenario_2</th>
+      <td>125,000.000</td>
+      <td>0.455</td>
+      <td>25.000</td>
+      <td>180.000</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Scenario_3</th>
+      <td>275,000.000</td>
+      <td>1.000</td>
+      <td>55.000</td>
+      <td>150.000</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we make use of the function hist() to plot the histogram based on the analyzed scenarios</span>
+<span class="n">TTRscenarioResults</span><span class="p">[</span><span class="s1">&#39;disruptionCost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/801d037b1982b7385583992b7e727a044723e2d117408b4b6820f996b8c9f601.png" src="../_images/801d037b1982b7385583992b7e727a044723e2d117408b4b6820f996b8c9f601.png" />
+</div>
+</div>
+</section>
+<section id="block-3b-tts-model">
+<h3>Block 3B: <strong>TTS Model:</strong><a class="headerlink" href="#block-3b-tts-model" title="Permalink to this heading">#</a></h3>
+<p>The second model is the time-to-survive (TTS) model to determine how long the disrupted supply chain can last until the demand is lost. The components of the models are as follows.</p>
+<p>(i) <strong>Decision variables:</strong> consist of:</p>
+<ul class="simple">
+<li><p>model.<strong>t</strong><span class="math notranslate nohighlight">\([n]\)</span> (or <span class="math notranslate nohighlight">\(t^{n}\)</span>): time-to-survive (TTS) for scenario <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p>model.<strong>y</strong><span class="math notranslate nohighlight">\([i, j]\)</span> (or <span class="math notranslate nohighlight">\(y_{ij}\)</span>) the amount of product <em>j</em> produced at supplier <em>i</em>;</p></li>
+</ul>
+<p>(ii) <strong>Objective function:</strong> In the TTS model, we want to maximize the TTS in each scenario, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[\max_{y,t} t^n\]</div>
+<p>(iii) <strong>Constraints:</strong></p>
+<p><strong>Constraint set 1:</strong>  demand of product <span class="math notranslate nohighlight">\(j\)</span> must be satisfied without loss**</p>
+<p>This set of constraints helps determine how long the demand can be fully satisfied without loss (<span class="math notranslate nohighlight">\(t^{n}\)</span>) given the current inventory level (<span class="math notranslate nohighlight">\(s_j\)</span>) and the production amount for product <span class="math notranslate nohighlight">\(j\)</span> from supplier <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(y_{ij}\)</span>) if the  link is active <span class="math notranslate nohighlight">\(\alpha^{n}_{ij}=1\)</span>.
+$<span class="math notranslate nohighlight">\(\sum_{i\in\mathcal{A}} \alpha^{n}_{ij} \cdot y_{ij} \geq d_j \cdot t^{n} - s_j,\quad \forall j\in \mathcal{V} \)</span>$</p>
+<p><strong>Constraint set 2:</strong>  capacity at each supplier <span class="math notranslate nohighlight">\(i\)</span></p>
+<p>This set of constraints ensures that the cumulative production output of supplier <span class="math notranslate nohighlight">\(i\)</span> is within the capacity of that supplier if it is still active <span class="math notranslate nohighlight">\(\left(\alpha^{n}_{ij}=1\right)\)</span>. Note that we need to check if at least one link <span class="math notranslate nohighlight">\(\alpha^{n}_{ij}\)</span> for supplier <span class="math notranslate nohighlight">\(i\)</span> is active for that scenario, otherwise Pyomo will return an error. In the case when there is no active link, we will omit that supplier in the model (since that supplier will not be used anyway). This is done in the codes when we use the boolean <em>noSupply</em>.</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j\in\mathcal{V}} \alpha^{n}_{ij} \cdot y_{ij}   \leq c_i \cdot t^{(n)},\quad \forall i\in \mathcal{A} \]</div>
+</section>
+<section id="id1">
+<h3>Block 4: Solution and results<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>To aggregate the results from each scenario, we calculate and store the results in the <strong>scenarioResults</strong> DataFrame which stores the following results based on the optimal solution <span class="math notranslate nohighlight">\(\left( t^{n,*}, \mathbf{y}^{n,*} \right)\)</span> for each scenario <span class="math notranslate nohighlight">\(n\)</span> : ‘TTS’ <span class="math notranslate nohighlight">\((t^n)\)</span>, ‘totalProduction’ <span class="math notranslate nohighlight">\(\left( \sum_i \sum_j y_{ij}^{n,*} \right)\)</span>, ‘activeLinks’ (how many links are active under a given scenario)$, and ‘utilizedLinks’ (how many links are used in the solution of a given scenario).</p>
+<p>Finally, we display the descriptive statistics of the results over all disruption scenarios. Here we make use of function <em>discribe()</em> in pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html">(Link)</a> and <em>hist()</em> in matplotlib <a class="reference external" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.hist.html">(Link)</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TTS Model</span>
+
+<span class="n">timeToSurvive</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">disruptionResponse</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">disruptionDemandLoss</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">resultcolumns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TTS&#39;</span><span class="p">,</span> <span class="s1">&#39;TTR&#39;</span><span class="p">,</span> <span class="s1">&#39;nShortagePeriods&#39;</span><span class="p">,</span> <span class="s1">&#39;activeLinks&#39;</span><span class="p">,</span><span class="s1">&#39;utilizedLinks&#39;</span><span class="p">]</span>
+<span class="n">TTSscenarioResults</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">resultcolumns</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">scenarioList</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">scenarioList</span><span class="p">:</span>
+  <span class="c1"># print(&quot;Analyzing:&quot;+str(n))</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">ConcreteModel</span><span class="p">()</span>
+
+  <span class="c1"># Variables</span>
+  <span class="c1"># There is only one variable t so we give a list of one value.</span>
+  <span class="c1"># If the SC is robust for that scenario, the variable t will be equal to infinity</span>
+  <span class="c1"># so we limit the max to a sufficiently large number (999 periods in this case)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">Var</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">within</span> <span class="o">=</span> <span class="n">NonNegativeReals</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">999</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">supplierList</span><span class="p">,</span> <span class="n">productList</span><span class="p">,</span> <span class="n">within</span> <span class="o">=</span> <span class="n">NonNegativeReals</span><span class="p">)</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">demandSatisfaction</span> <span class="o">=</span> <span class="n">ConstraintList</span><span class="p">()</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">supplierCapacity</span> <span class="o">=</span> <span class="n">ConstraintList</span><span class="p">()</span>
+
+  <span class="c1"># Objective function</span>
+  <span class="n">obj_expr</span> <span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="c1"># print(obj_expr)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">OBJ</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">obj_expr</span><span class="p">,</span> <span class="n">sense</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">)</span>
+
+  <span class="c1"># Constraints 1 demand must be fully satisfied</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+    <span class="n">const_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">supplierList</span><span class="p">)</span> \
+                  <span class="o">&gt;=</span> <span class="n">productDemandDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">productInvDict</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="c1"># print(const_expr)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">demandSatisfaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">const_expr</span><span class="p">)</span>
+
+  <span class="c1"># Constraints 2 capacity at each supplier i</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">supplierList</span><span class="p">:</span>
+    <span class="c1"># check if there is any left hand side (i.e., if there is at least one available active link), otherwise pyomo will return an error</span>
+    <span class="n">noSupply</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">noSupply</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">break</span>
+
+    <span class="c1"># we generate the constraint only if noSupply = False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">noSupply</span><span class="p">:</span>
+      <span class="n">const_expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">productList</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">supplierCapacityDict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="c1">#print(const_expr)</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">supplierCapacity</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">expr</span> <span class="o">=</span> <span class="n">const_expr</span><span class="p">)</span>
+
+  <span class="c1"># Solve the model</span>
+  <span class="n">opt</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;glpk&#39;</span><span class="p">)</span>
+  <span class="n">opt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+  <span class="c1"># Save the result for each scenario</span>
+
+  <span class="n">timeToSurvive</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">OBJ</span><span class="p">()</span>
+  <span class="n">TTSscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;TTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">timeToSurvive</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">TTSscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;TTR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenarioTTRDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+  <span class="n">disruptionResponse</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">nUtilizedLinks</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inputScenarios</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="n">inputScenarios</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ind</span><span class="p">][</span><span class="s1">&#39;Node&#39;</span><span class="p">]</span>
+      <span class="n">j</span> <span class="o">=</span> <span class="n">inputScenarios</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ind</span><span class="p">][</span><span class="s1">&#39;Product&#39;</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">disruptionResponse</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+          <span class="n">nUtilizedLinks</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">disruptionResponse</span><span class="p">[</span><span class="n">n</span><span class="p">][(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+
+  <span class="n">TTSscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;nShortagePeriods&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">TTSscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;TTR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">TTSscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;TTS&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">TTSscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;activeLinks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scenarioActiveNodeDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+  <span class="n">TTSscenarioResults</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;utilizedLinks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nUtilizedLinks</span>
+
+<span class="c1"># Show the results</span>
+<span class="n">pandas</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">display</span><span class="p">(</span><span class="n">TTSscenarioResults</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TTS</th>
+      <th>TTR</th>
+      <th>nShortagePeriods</th>
+      <th>activeLinks</th>
+      <th>utilizedLinks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Scenario_0</th>
+      <td>999.000</td>
+      <td>2</td>
+      <td>0</td>
+      <td>6</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>Scenario_1</th>
+      <td>2.250</td>
+      <td>2</td>
+      <td>0</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Scenario_2</th>
+      <td>1.286</td>
+      <td>2</td>
+      <td>0.714</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Scenario_3</th>
+      <td>0.900</td>
+      <td>2</td>
+      <td>1.100</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Intepret and show the results</span>
+<span class="c1"># Here we make use of the function hist() to plot the histogram</span>
+<span class="n">TTSscenarioResults</span><span class="p">[</span><span class="s1">&#39;nShortagePeriods&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">TTSscenarioResults</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2deaad82b442c6892c041c5c179137ad69bd5a8f7965b008dfb93cd32b1dee47.png" src="../_images/2deaad82b442c6892c041c5c179137ad69bd5a8f7965b008dfb93cd32b1dee47.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TTS</th>
+      <th>TTR</th>
+      <th>nShortagePeriods</th>
+      <th>activeLinks</th>
+      <th>utilizedLinks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Scenario_0</th>
+      <td>999.000</td>
+      <td>2</td>
+      <td>0</td>
+      <td>6</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>Scenario_1</th>
+      <td>2.250</td>
+      <td>2</td>
+      <td>0</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Scenario_2</th>
+      <td>1.286</td>
+      <td>2</td>
+      <td>0.714</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Scenario_3</th>
+      <td>0.900</td>
+      <td>2</td>
+      <td>1.100</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Case3_disruption_analytics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Case: Disruption Analytics - Ford Motor</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Ex_Lecture_Demo_Inventory_Sim.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">(R, s, S) Inventory Simulation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocks-1-2-data-inputs-and-parameters">Blocks 1&amp;2: Data inputs and parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocks-3-4-optimization-model-results">Blocks 3 &amp; 4: Optimization model &amp; results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3a-ttr-model">Block 3A: <strong>TTR Model:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-solution-and-results">Block 4: Solution and results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3b-tts-model">Block 3B: <strong>TTS Model:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Block 4: Solution and results</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yossiri Adulyasak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
