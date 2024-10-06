@@ -1,10 +1,10 @@
-title : Supply Chain Analytics - Case Studies and Demos with Code
+title : Supply Chain Analytics - Case Studies and Demos
 author: Yossiri Adulyasak 
 logo: 'sc_analytics_logo_small.png'
 
 # Short description about the book
 description: >-
-  A brief introduction to Python programming for supply chain analytics.
+  Case studie and demos of supply chain analytics.
 
 only_build_toc_files        : true
 
@@ -24,7 +24,7 @@ notebook_interface            : "notebook"
 
 # Launch button settings
 repository:
-  url                         : https://github.com/acedesci/scanalytics_cases/tree/main/online_book
+  url                         : https://github.com/acedesci/scanalytics_cases/tree/main/onlinebook
   path_to_book                : "book"
 
 # binder:

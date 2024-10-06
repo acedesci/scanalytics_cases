@@ -3,7 +3,7 @@ root: docs/index
 defaults:
   maxdepth: 3
 parts:
-- caption: Case studies and Demos
+- caption: Case Studies and Demos
   chapters:
   - file: docs/introduction
   - file: docs/Case1_retails_intro
